@@ -26,7 +26,8 @@ class ViewController: UIViewController {
         viewPassword.setCornerRadiousAndBorder(.systemBlue, borderWidth: 0.5, cornerRadius: viewPassword.frame.size.height/2)
         
         btnLogin.setCornerRadiousAndBorder(.clear, borderWidth: 0.5, cornerRadius: btnLogin.frame.size.height/2)
-        
+        txtUserName.text = "test@gmail.com"
+        txtPassword.text = "test"
         // Do any additional setup after loading the view.
     }
     
@@ -65,68 +66,64 @@ class ViewController: UIViewController {
     }
     
     func WS_Login(){
-        if HelperClass.isInternetAvailable {
-            SwiftLoader.show(animated: true)
-            var param = [String:Any]()
-            strUrl = WebServicesLink.login
-            
-            param = ["userid":txtUserName.text!,"password":txtPassword.text!,"appid":UIDevice.current.identifierForVendor?.uuidString]
-            
-            
-            print("param >>>>>>>>>>\(param)")
-            print("strUrl >>>>>>>>>>\(strUrl)")
-            
-            WebService.createRequestAndGetResponse(strUrl, methodType: .POST, andHeaderDict:[:], andParameterDict:param, onCompletion: { (dictResponse,error,reply,statusCode) in
-                SwiftLoader.hide()
-                print("dictResponse >>>\(String(describing: dictResponse))")
-                print("error >>>\(String(describing: error))")
-                print("reply >>>\(String(describing: reply))")
-                print("statuscode >>>\(String(describing: statusCode))")
+       
+            if HelperClass.isInternetAvailable {
+                SwiftLoader.show(animated: true)
+                var param = [String:Any]()
+                strUrl = WebServicesLink.login
                 
-                let json = dictResponse! as[String: Any] as NSDictionary
-                print("json>>>>\(json)")
-                var msg = ""
-                msg = json.GetString(forKey: WebServiceConstant.msg)
-                if msg == "" {
-                    msg = MessageStringFile.serverError()
-                }
-                if json.count > 0 {
+                param = ["userid":txtUserName.text!,"password":txtPassword.text!,"appid":UIDevice.current.identifierForVendor?.uuidString ?? ""]
+                
+                
+                print("param >>>>>>>>>>\(param)")
+                print("strUrl >>>>>>>>>>\(strUrl)")
+                
+                WebService.createRequestAndGetResponse(strUrl, methodType: .POST, andHeaderDict:[:], andParameterDict:param, onCompletion: { (dictResponse,error,reply,statusCode) in
                     SwiftLoader.hide()
-                   let dict:String = json.GetString(forKey: WebServiceConstant.result)
-                    print("status",dict)
-                    let status = "1"
-                    if  status == "-1"{
-                        PopUpView.addPopUpAlertView(MessageStringFile.whoopsText(), leftBtnTitle: MessageStringFile.okText(), rightBtnTitle: "", firstLblTitle: "Wrong UserName or Password", secondLblTitle: "")
-                                           PopUpView.sharedInstance.delegate = nil
-                    }else{
-                        let dict:NSMutableDictionary = json.GetNSMutableDictionary(forKey: WebServiceConstant.result)
-                        print("dict >>>>>>>>>>\(dict)")
-                        AppUserDefault.setUserDetails(dict: dict)
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let mainViewController = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
-                        let leftViewController = storyboard.instantiateViewController(withIdentifier: "LeftViewController") as! LeftViewController
-                        let nvc: UINavigationController = UINavigationController(rootViewController: mainViewController)
-                        leftViewController.dailyVC = nvc
-                        let slideMenuController = SlideMenuController(mainViewController:nvc, leftMenuViewController: leftViewController)
-                        slideMenuController.delegate = mainViewController
-                    UIApplication.shared.windows.first?.rootViewController = slideMenuController
-                    UIApplication.shared.windows.first?.makeKeyAndVisible()
+                    print("dictResponse >>>\(String(describing: dictResponse))")
+                    print("error >>>\(String(describing: error))")
+                    print("reply >>>\(String(describing: reply))")
+                    print("statuscode >>>\(String(describing: statusCode))")
+                    
+                    let json = dictResponse! as[String: Any] as NSDictionary
+                    print("json>>>>\(json)")
+                    var msg = ""
+                    msg = json.GetString(forKey: WebServiceConstant.msg)
+                    if msg == "" {
+                        msg = MessageStringFile.serverError()
                     }
+                    if json.count > 0{
+                        SwiftLoader.hide()
+                        let Status:Int = json.GetInt(forKey: "result")
+                        print("status",Status)
+                        if "\(Status)" == "-1"{
+                            PopUpView.addPopUpAlertView(MessageStringFile.whoopsText(), leftBtnTitle: MessageStringFile.okText(), rightBtnTitle: "", firstLblTitle: "Wrong UserName or Password", secondLblTitle: "")
+                            PopUpView.sharedInstance.delegate = nil
+                        }else{
+                            let dict:NSMutableDictionary = NSMutableDictionary(dictionary:json)
+                            print("dict >>>>>>>>>>\(dict)")
+                            AppUserDefault.setUserDetails(dict: dict )
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            let mainViewController = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
+                            let leftViewController = storyboard.instantiateViewController(withIdentifier: "LeftViewController") as! LeftViewController
+                            let nvc: UINavigationController = UINavigationController(rootViewController: mainViewController)
+                            leftViewController.homeVC = nvc
+                            let slideMenuController = SlideMenuController(mainViewController:nvc, leftMenuViewController: leftViewController)
+                            slideMenuController.delegate = mainViewController
+                            UIApplication.shared.windows.first?.rootViewController = slideMenuController
+                            UIApplication.shared.windows.first?.makeKeyAndVisible()
                         
                     }
-                 else {
-                    PopUpView.addPopUpAlertView(MessageStringFile.whoopsText(), leftBtnTitle: MessageStringFile.okText(), rightBtnTitle: "", firstLblTitle: "Wrong UserName or Password", secondLblTitle: "")
-                    PopUpView.sharedInstance.delegate = nil
-                }
-            })
-        } else {
-            PopUpView.addPopUpAlertView(MessageStringFile.whoopsText(), leftBtnTitle:MessageStringFile.okText() , rightBtnTitle:"" , firstLblTitle: MessageStringFile.networkReachability(), secondLblTitle: "")
-            PopUpView.sharedInstance.delegate = nil
+                    }else{
+                    PopUpView.addPopUpAlertView(MessageStringFile.whoopsText(), leftBtnTitle: MessageStringFile.okText(), rightBtnTitle: "", firstLblTitle: "Wrong Details", secondLblTitle: "")
+                        PopUpView.sharedInstance.delegate = nil
+                    }
+                })
+            } else {
+                PopUpView.addPopUpAlertView(MessageStringFile.whoopsText(), leftBtnTitle:MessageStringFile.okText() , rightBtnTitle:"" , firstLblTitle: MessageStringFile.networkReachability(), secondLblTitle: "")
+                PopUpView.sharedInstance.delegate = nil
+            }
         }
-    }
-    
-    
-
 
 }
 @IBDesignable

@@ -8,7 +8,8 @@
 import UIKit
 
 enum LeftMenu: Int {
-    case Daily = 0
+    case home = 0
+    case Daily
     case Weekly
     case Invoice
     case Logout
@@ -21,14 +22,16 @@ protocol LeftMenuProtocol : class {
 class LeftViewController : UIViewController, LeftMenuProtocol,PopUpViewDelegate {
     var Email = String()
    
+    
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
-    var menus = ["Daily Report", "Weekly Report","Invoice","Logout"]
+    var menus = ["Home","Daily Report", "Weekly Report","Invoice","Logout"]
    
-    var menuImg = ["16-daily-report", "16-weekly-report","16-invoice","32-logout"]
+    var menuImg = ["home","16-daily-report", "16-weekly-report","16-invoice","32-logout"]
    
     var dailyVC: UIViewController!
+    var homeVC: UIViewController!
     var WeekVC: UIViewController!
     var InvoiceVC: UIViewController!
     var LogoutVC: UIViewController!
@@ -57,47 +60,24 @@ class LeftViewController : UIViewController, LeftMenuProtocol,PopUpViewDelegate 
 //        imgProfile.sd_setImage(with: URL(string:urlstring), placeholderImage: UIImage(named: "profileimg"))
       
       let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//       
-//        let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
-//        self.homeVC = UINavigationController(rootViewController: homeVC)
-//       
-//        let messageVC = storyboard.instantiateViewController(withIdentifier: "MessagesVC") as! MessagesVC
-//        self.MessagesVC = UINavigationController(rootViewController: messageVC)
-//
-//        let letterVC = storyboard.instantiateViewController(withIdentifier: "GenerateLatterVC") as! GenerateLatterVC
-//        self.lattersVC = UINavigationController(rootViewController: letterVC)
-//
-//        let reportVC = storyboard.instantiateViewController(withIdentifier: "ReportsVC") as! ReportsVC
-//        self.ReportsVC = UINavigationController(rootViewController: reportVC)
-//        
-//        let ShareProvideDetailsVC = storyboard.instantiateViewController(withIdentifier: "ShareProvideDetailsVC") as! ShareProvideDetailsVC
-//        self.ShareProviderDetailsVC = UINavigationController(rootViewController: ShareProvideDetailsVC)
-//
-//        let UploadDocumentVC = storyboard.instantiateViewController(withIdentifier: "UploadDocumentVC") as! UploadDocumentVC
-//        self.UploadDocumentsVC = UINavigationController(rootViewController: UploadDocumentVC)
-//
-//        let UpdatePasswordVC = storyboard.instantiateViewController(withIdentifier: "UpdatePasswordVC") as! UpdatePasswordVC
-//        self.updatePasswordVC = UINavigationController(rootViewController: UpdatePasswordVC)
-//
-//        let invoiceVC = storyboard.instantiateViewController(withIdentifier: "InvoicesVC") as! InvoicesVC
-//        self.InvoicesVC = UINavigationController(rootViewController: invoiceVC)
-//       
+       let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
+            self.homeVC = UINavigationController(rootViewController: homeVC)
+        let DAILY = storyboard.instantiateViewController(withIdentifier: "DailyReportVC") as! DailyReportVC
+        self.dailyVC = UINavigationController(rootViewController: DAILY)
+       
+        let week = storyboard.instantiateViewController(withIdentifier: "WeeklyReportVC") as! WeeklyReportVC
+        self.WeekVC = UINavigationController(rootViewController: week)
+
+        let Invoice = storyboard.instantiateViewController(withIdentifier: "InvoiceVC") as! InvoiceVC
+        self.InvoiceVC = UINavigationController(rootViewController: Invoice)
         let logoutVC = storyboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
         self.LogoutVC = UINavigationController(rootViewController: logoutVC)
-        
-        self.imgProfile.layer.cornerRadius = self.imgProfile.bounds.size.height / 2
-        self.imgProfile.clipsToBounds = true
-        self.imgProfile.layer.borderWidth = 1
-        self.imgProfile.layer.borderColor = UIColor.clear.cgColor
-        
         
 
     }
     override func viewWillAppear(_ animated: Bool) {
         let dict =  AppUserDefault.getUserDetails()
         print("sidemenudict",dict)
-        
-
         
        // let urlstring = dict.GetString(forKey:"picture")
         //imgProfile.sd_setImage(with: URL(string:urlstring), placeholderImage: UIImage(named: "profileimg"))
@@ -121,11 +101,15 @@ class LeftViewController : UIViewController, LeftMenuProtocol,PopUpViewDelegate 
     
     func changeViewController(_ menu: LeftMenu) {
         switch menu {
+            case .home:
+        self.slideMenuController()?.changeMainViewController(self.homeVC, close: true)
+        
         case .Daily:
         self.slideMenuController()?.changeMainViewController(self.dailyVC, close: true)
             
         case .Weekly:
         self.slideMenuController()?.changeMainViewController(self.WeekVC, close: true)
+       
        
         case .Invoice:
     self.slideMenuController()?.changeMainViewController(self.InvoiceVC, close: true)
@@ -234,7 +218,7 @@ extension LeftViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let menu = LeftMenu(rawValue: indexPath.row) {
             switch menu {
-             case .Daily, .Weekly,.Invoice,.Logout:
+            case .home,.Daily, .Weekly,.Invoice,.Logout:
                 return 48
             }
         }
@@ -269,7 +253,7 @@ extension LeftViewController : UITableViewDataSource {
         
         if let menu = LeftMenu(rawValue: indexPath.row) {
             switch menu {
-            case .Daily, .Weekly,.Invoice,.Logout:
+            case .home,.Daily, .Weekly,.Invoice,.Logout:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "BaseTableViewCell", for: indexPath) as! BaseTableViewCell
                
                 cell.lblName?.text = menus[indexPath.row]

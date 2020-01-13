@@ -154,7 +154,7 @@ public class SwiftLoader: UIView {
         self.titleLabel?.font = self.config.titleTextFont
       self.titleLabel?.textColor = UIColor.white
         self.titleLabel?.text = self.title
-       self.loadingView?.lineTintColor = UIColor.blue
+       self.loadingView?.lineTintColor = UIColor.black
         
         self.titleLabel?.isHidden = self.title == nil
     }

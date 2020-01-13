@@ -5,7 +5,6 @@
 import Foundation
 import UIKit
 
-@available(iOS 13.0, *)
 class WebServicesLink: NSObject {
     
     static let  BaseUrl = "http://nafees.co/crm/mobileapp/"
@@ -123,10 +122,9 @@ class WebServicesLink: NSObject {
 class WebServiceConstant: NSObject {
     static let status = "success"
      static let Error = "FAIL"
-      static let result = "result"
-    
     static let success = "success"
     static let msg = "message"
+    static let result = "result"
     static let baseurl = "base_url"
     static let customer = "customer"
     static let email = "email"

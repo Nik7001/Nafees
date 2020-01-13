@@ -19,6 +19,7 @@ class HomeVC: UIViewController,SlideMenuControllerDelegate {
         btnWeek.setCornerRadiousAndBorder(.lightGray, borderWidth: 0.2, cornerRadius: 4)
           btnInvoice.setCornerRadiousAndBorder(.lightGray, borderWidth: 0.2, cornerRadius: 4)
           BtnDaily.setCornerRadiousAndBorder(.lightGray, borderWidth: 0.2, cornerRadius: 4)
+    
         // Do any additional setup after loading the view.
     }
     

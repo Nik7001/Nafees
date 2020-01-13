@@ -264,7 +264,6 @@ class PlaceHolderTxt: NSObject {
 }
 
 class PredefinedConstants: NSObject {
-    @available(iOS 13.0, *)
     static  let appDelegate = UIApplication.shared.delegate as! AppDelegate
     static  let userDeviceId = UIDevice.current.identifierForVendor!.uuidString
     
