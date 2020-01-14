@@ -8,7 +8,7 @@ import UIKit
 class WebServicesLink: NSObject {
     
     static let  BaseUrl = "http://nafees.co/crm/mobileapp/"
-    
+   
     class var baseUrl: String {
         get {
             if let dict = UserDefaults.standard.dictionary(forKey: AppUserDefault.baseUrlData) {
@@ -48,9 +48,9 @@ class WebServicesLink: NSObject {
             return (baseUrl + "loginUser")
         }
     }
-    class var generatedletters: String {
+    class var getReportEntryData: String {
         get {
-            return (baseUrl + "generated-letters")
+            return (baseUrl + "getReportEntryData")
         }
     }
     class var creditreports: String {

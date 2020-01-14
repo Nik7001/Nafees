@@ -8,8 +8,12 @@
 
 import UIKit
 
-class DailyReportVC: UIViewController,UITextFieldDelegate,UIPopoverPresentationControllerDelegate {
+class DailyReportVC: UIViewController,UITextFieldDelegate,UISearchBarDelegate{
 
+    @IBOutlet weak var tblView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var viewShowCity: UIView!
+    @IBOutlet weak var btnViewHide: UIButton!
     @IBOutlet weak var viewText: UIView!
     @IBOutlet weak var txtOrderNumber: UITextField!
     @IBOutlet weak var btnSubmit: GradientButton!
@@ -28,6 +32,17 @@ class DailyReportVC: UIViewController,UITextFieldDelegate,UIPopoverPresentationC
     var imagePicker: ImagePicker!
     let regularFont = UIFont.systemFont(ofSize: 16)
     let boldFont = UIFont.boldSystemFont(ofSize: 16)
+    var strUrl = String()
+   
+    var waitingeasonArray = NSMutableArray()
+    var waiting_timeArray = NSMutableArray()
+    var siteArray = NSArray()
+        var arrFiltered = NSArray()
+       var searchActive : Bool = false
+    var truckArray = NSMutableArray()
+    var arrTruck = [String]()
+    var arrTime = [String]()
+    var arrwaitingTime = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
        setCornerRadious()
@@ -36,6 +51,20 @@ class DailyReportVC: UIViewController,UITextFieldDelegate,UIPopoverPresentationC
         formatter.dateFormat = "dd-MM-yyyy"
         btnCalender.setTitle(formatter.string(from: Date()), for: .normal)
          self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+        WS_GetReport()
+        
+        tblView.delegate = self
+        tblView.dataSource = self
+        
+        viewShowCity.isHidden = true
+        btnViewHide.isHidden = true
+              btnCity.setTitleColor(.lightGray, for: .normal)
+               btnRate.setTitleColor(.lightGray, for: .normal)
+               btnSite.setTitleColor(.lightGray, for: .normal)
+            btnCity.setTitle("City", for:.normal)
+            btnRate.setTitle("Rate", for:.normal)
+            btnSite.setTitle("Site", for:.normal)
+         searchBar.delegate = self
         // Do any additional setup after loading the view.
     }
 override func viewWillAppear(_ animated: Bool) {
@@ -55,8 +84,38 @@ override func viewWillAppear(_ animated: Bool) {
         btnWaitingTImeR.setCornerRadiousAndBorder(.systemTeal, borderWidth: 1.0, cornerRadius: btnWaitingTImeR.frame.size.height/2)
         btnCalender.setCornerRadiousAndBorder(.systemTeal, borderWidth: 1.0, cornerRadius: btnCalender.frame.size.height/2)
         btnpickImage.setCornerRadiousAndBorder(.systemTeal, borderWidth: 1.0, cornerRadius: btnpickImage.frame.size.height/2)
+         viewShowCity.setCornerRadiousAndBorder(.lightGray, borderWidth: 1.0, cornerRadius: 4)
         
     }
+    
+    @IBAction func btnCancel(_ sender: Any) {
+        viewShowCity.isHidden = true
+        btnViewHide.isHidden = true
+        btnCity.setTitleColor(.lightGray, for: .normal)
+                     btnRate.setTitleColor(.lightGray, for: .normal)
+                     btnSite.setTitleColor(.lightGray, for: .normal)
+                  btnCity.setTitle("City", for:.normal)
+                  btnRate.setTitle("Rate", for:.normal)
+                  btnSite.setTitle("Site", for:.normal)
+    }
+    
+    @IBAction func btnOk(_ sender: Any) {
+        viewShowCity.isHidden = true
+        btnViewHide.isHidden = true
+        btnCity.setTitleColor(.lightGray, for: .normal)
+                     btnRate.setTitleColor(.lightGray, for: .normal)
+                     btnSite.setTitleColor(.lightGray, for: .normal)
+                  btnCity.setTitle("City", for:.normal)
+                  btnRate.setTitle("Rate", for:.normal)
+                  btnSite.setTitle("Site", for:.normal)
+    }
+    
+    @IBAction func btnHide(_ sender: Any) {
+        viewShowCity.isHidden = true
+        btnViewHide.isHidden = true
+    }
+    
+    
     
     
     
@@ -71,6 +130,62 @@ override func viewWillAppear(_ animated: Bool) {
         UIApplication.shared.windows.first?.rootViewController = slideMenuController
         UIApplication.shared.windows.first?.makeKeyAndVisible()
     }
+    
+    
+     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    //        searchActive = false;
+    //        self.searchBar.resignFirstResponder()
+    //
+    //        DispatchQueue.main.async(execute: {
+    //            self.tblfavContact.reloadData()
+    //        })
+            
+        }
+        
+        func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+            searchActive = false;
+            self.searchBar.resignFirstResponder()
+            DispatchQueue.main.async(execute: {
+                self.tblView.reloadData()
+            })
+        }
+        
+        func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    //        searchBar.text = ""
+    //        searchActive = false;
+            self.searchBar.resignFirstResponder()
+    //        DispatchQueue.main.async(execute: {
+    //            self.tblfavContact.reloadData()
+    //        })
+            
+        }
+        
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            
+            if searchText != "" {
+                let searchPredicate = NSPredicate(format: "site CONTAINS[C] %@", searchBar.text!)
+                arrFiltered = (siteArray as
+                    NSArray).filtered(using: searchPredicate) as NSArray
+                
+                if(arrFiltered.count == 0){
+                    searchActive = true;
+                } else {
+                    searchActive = true;
+                }
+            } else {
+                searchActive = false;
+            }
+            
+            DispatchQueue.main.async(execute: {
+                self.tblView.reloadData()
+            })
+            
+            
+            
+        }
+    private func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+           searchActive = true;
+       }
     
     @IBAction func btnCalendr(_ sender: Any) {
        showDatePicker()
@@ -88,7 +203,8 @@ override func viewWillAppear(_ animated: Bool) {
          hideKeyBoard()
         toolBar.removeFromSuperview()
         datePicker.removeFromSuperview()
-        site()
+        viewShowCity.isHidden = false
+        btnViewHide.isHidden = false
     }
     
     @IBAction func btnCity(_ sender: Any) {
@@ -204,14 +320,14 @@ override func viewWillAppear(_ animated: Bool) {
          itemColor           : .black,
          itemFont            : regularFont
      )
-     let fruits = ["Cherry", "Apricots", "Banana", "Blueberry", "Orange", "Apple", "Grapes", "Guava", "Mango", "Cherries", "Damson", "Grapefruit", "Pluot", "Plums", "Kiwi", "Peach", "Pear", "Pomegranate", "Starfruit", "Watermelon", "Pineapples"]
-     let picker = YBTextPicker.init(with: fruits, appearance: blueAppearance,
+    
+        let picker = YBTextPicker.init(with: arrTruck , appearance: blueAppearance,
                                     onCompletion: { (selectedIndexes, selectedValues) in
                                      if selectedValues.count > 0{
                                          
                                          var values = [String]()
                                          for index in selectedIndexes{
-                                             values.append(fruits[index])
+                                            values.append(self.arrTruck[index])
                                          }
                                 self.btnTruck.setTitle(values.joined(separator: ", "), for: .normal)
                                     self.btnTruck.setTitleColor(.black, for: .normal)
@@ -240,7 +356,7 @@ override func viewWillAppear(_ animated: Bool) {
     
     func WaitingTimeReasion(){
        let blueAppearance = YBTextPickerAppearanceManager.init(
-            pickerTitle         : "Truck No.",
+            pickerTitle         : "Waiting Time Reason",
             titleFont           : boldFont,
             titleTextColor      : .black,
             titleBackground     : .clear,
@@ -255,27 +371,27 @@ override func viewWillAppear(_ animated: Bool) {
             itemColor           : .black,
             itemFont            : regularFont
         )
-        let fruits = ["Cherry", "Apricots", "Banana", "Blueberry", "Orange", "Apple", "Grapes", "Guava", "Mango", "Cherries", "Damson", "Grapefruit", "Pluot", "Plums", "Kiwi", "Peach", "Pear", "Pomegranate", "Starfruit", "Watermelon", "Pineapples"]
-        let picker = YBTextPicker.init(with: fruits, appearance: blueAppearance,
+        
+        let picker = YBTextPicker.init(with: arrwaitingTime, appearance: blueAppearance,
                                        onCompletion: { (selectedIndexes, selectedValues) in
                                         if selectedValues.count > 0{
                                             
                                             var values = [String]()
                                             for index in selectedIndexes{
-                                                values.append(fruits[index])
+                                                values.append(self.arrwaitingTime[index])
                                             }
-                                   self.btnTruck.setTitle(values.joined(separator: ", "), for: .normal)
-                                       self.btnTruck.setTitleColor(.black, for: .normal)
+                                   self.btnWaitingTImeR.setTitle(values.joined(separator: ", "), for: .normal)
+                                       self.btnWaitingTImeR.setTitleColor(.black, for: .normal)
                                             
                                         }else{
-                                            self.btnTruck.setTitle("Truck No.", for: .normal)
-                                           self.btnTruck.setTitleColor(.lightGray, for: .normal)
+                                            self.btnWaitingTImeR.setTitle("Waiting Time Reason", for: .normal)
+                                           self.btnWaitingTImeR.setTitleColor(.lightGray, for: .normal)
                                         }
         },
                                        onCancel: {
                                         print("Cancelled")
-                                           self.btnTruck.setTitle("Truck No.", for: .normal)
-                                      self.btnTruck.setTitleColor(.lightGray, for: .normal)
+                                           self.btnWaitingTImeR.setTitle("Waiting Time Reason", for: .normal)
+                                       self.btnWaitingTImeR.setTitleColor(.lightGray, for: .normal)
         }
         )
         
@@ -291,7 +407,7 @@ override func viewWillAppear(_ animated: Bool) {
     
     func WaitingTime(){
        let blueAppearance = YBTextPickerAppearanceManager.init(
-            pickerTitle         : "Truck No.",
+            pickerTitle         : "WaitingTime.",
             titleFont           : boldFont,
             titleTextColor      : .black,
             titleBackground     : .clear,
@@ -306,27 +422,26 @@ override func viewWillAppear(_ animated: Bool) {
             itemColor           : .black,
             itemFont            : regularFont
         )
-        let fruits = ["Cherry", "Apricots", "Banana", "Blueberry", "Orange", "Apple", "Grapes", "Guava", "Mango", "Cherries", "Damson", "Grapefruit", "Pluot", "Plums", "Kiwi", "Peach", "Pear", "Pomegranate", "Starfruit", "Watermelon", "Pineapples"]
-        let picker = YBTextPicker.init(with: fruits, appearance: blueAppearance,
+        let picker = YBTextPicker.init(with: arrTime, appearance: blueAppearance,
                                        onCompletion: { (selectedIndexes, selectedValues) in
                                         if selectedValues.count > 0{
                                             
                                             var values = [String]()
                                             for index in selectedIndexes{
-                                                values.append(fruits[index])
+                                                values.append(self.arrTime[index])
                                             }
-                                   self.btnTruck.setTitle(values.joined(separator: ", "), for: .normal)
-                                       self.btnTruck.setTitleColor(.black, for: .normal)
+                                   self.btnTime.setTitle(values.joined(separator: ", ") , for: .normal)
+                                       self.btnTime.setTitleColor(.black, for: .normal)
                                             
                                         }else{
-                                            self.btnTruck.setTitle("Truck No.", for: .normal)
-                                           self.btnTruck.setTitleColor(.lightGray, for: .normal)
+                                            self.btnTime.setTitle("Waiting Time", for: .normal)
+                                           self.btnTime.setTitleColor(.lightGray, for: .normal)
                                         }
         },
                                        onCancel: {
                                         print("Cancelled")
-                                           self.btnTruck.setTitle("Truck No.", for: .normal)
-                                      self.btnTruck.setTitleColor(.lightGray, for: .normal)
+                                           self.btnTime.setTitle("Waiting Time", for: .normal)
+                                      self.btnTime.setTitleColor(.lightGray, for: .normal)
         }
         )
         
@@ -339,64 +454,83 @@ override func viewWillAppear(_ animated: Bool) {
         
         picker.show(withAnimation: .Fade)
        }
-    func site(){
-       let blueAppearance = YBTextPickerAppearanceManager.init(
-            pickerTitle         : "Truck No.",
-            titleFont           : boldFont,
-            titleTextColor      : .black,
-            titleBackground     : .clear,
-            searchBarFont       : regularFont,
-            searchBarPlaceholder: "Search",
-            closeButtonTitle    : "Cancel",
-            closeButtonColor    : .darkGray,
-            closeButtonFont     : regularFont,
-            doneButtonTitle     : "Done",
-            doneButtonColor     : UIColor.systemBlue,
-            doneButtonFont      : boldFont,
-            itemColor           : .black,
-            itemFont            : regularFont
-        )
-        let fruits = ["Cherry", "Apricots", "Banana", "Blueberry", "Orange", "Apple", "Grapes", "Guava", "Mango", "Cherries", "Damson", "Grapefruit", "Pluot", "Plums", "Kiwi", "Peach", "Pear", "Pomegranate", "Starfruit", "Watermelon", "Pineapples"]
-        let picker = YBTextPicker.init(with: fruits, appearance: blueAppearance,
-                                       onCompletion: { (selectedIndexes, selectedValues) in
-                                        if selectedValues.count > 0{
-                                            
-                                            var values = [String]()
-                                            for index in selectedIndexes{
-                                                values.append(fruits[index])
-                                            }
-                                   self.btnSite.setTitle(values.joined(separator: ", "), for: .normal)
-                                       self.btnSite.setTitleColor(.black, for: .normal)
-                                            
-                                        }else{
-                                             self.btnCity.setTitle("City", for: .normal)
-                                                                                self.btnCity.setTitleColor(.lightGray, for: .normal)
-                                                                                  self.btnRate.setTitle("City", for: .normal)
-                                                                                                                       self.btnRate.setTitleColor(.lightGray, for: .normal)
-                                                                                  self.btnSite.setTitle("City", for: .normal)
-                                                                                                                                          self.btnSite.setTitleColor(.lightGray, for: .normal)
-                                        }
-        },
-                                       onCancel: {
-                                        print("Cancelled")
-                                           self.btnCity.setTitle("City", for: .normal)
-                                      self.btnCity.setTitleColor(.lightGray, for: .normal)
-                                        self.btnRate.setTitle("City", for: .normal)
-                                                                             self.btnRate.setTitleColor(.lightGray, for: .normal)
-                                        self.btnSite.setTitle("City", for: .normal)
-                                                                                                self.btnSite.setTitleColor(.lightGray, for: .normal)
-        }
-        )
-        
-        if let title = btnTruck.title(for: .normal){
-            if title.contains(","){
-                picker.preSelectedValues = title.components(separatedBy: ", ")
+   
+    func WS_GetReport(){
+    
+         if HelperClass.isInternetAvailable {
+             SwiftLoader.show(animated: true)
+            // var param = [String:Any]()
+             strUrl = WebServicesLink.getReportEntryData
+            
+             print("strUrl >>>>>>>>>>\(strUrl)")
+             
+             WebService.createRequestAndGetResponse(strUrl, methodType: .GET, andHeaderDict:[:], andParameterDict:nil, onCompletion: { (dictResponse,error,reply,statusCode) in
+                 SwiftLoader.hide()
+                 print("dictResponse >>>\(String(describing: dictResponse))")
+                 print("error >>>\(String(describing: error))")
+                 print("reply >>>\(String(describing: reply))")
+                 print("statuscode >>>\(String(describing: statusCode))")
+                 
+                 let json = dictResponse! as[String: Any] as NSDictionary
+                 print("json>>>>\(json)")
+                 var msg = ""
+                 msg = json.GetString(forKey: WebServiceConstant.msg)
+                 if msg == "" {
+                     msg = MessageStringFile.serverError()
+                 }
+                 if json.count > 0{
+                   
+                    self.siteArray = json.GetNSMutableArray(forKey: "site")
+                    self.truckArray = json.GetNSMutableArray(forKey: "truck")
+                    self.waitingeasonArray = json.GetNSMutableArray(forKey: "waiting_reason")
+                     self.waiting_timeArray = json.GetNSMutableArray(forKey: "waiting_time")
+                   
+                if self.truckArray.count>0{
+                        for dict in self.truckArray {
+                        let newdict:NSMutableDictionary = dict as! NSMutableDictionary
+                        self.arrTruck.append(newdict.GetString(forKey: "truck_no"))
+                        print("arrTruck",self.arrTruck)
+                        }
+                                               
+                    }
+                if self.waitingeasonArray.count>0{
+                    for dict in self.waitingeasonArray {
+                        let newdict:NSMutableDictionary = dict as! NSMutableDictionary
+                            self.arrwaitingTime.append(newdict.GetString(forKey: "w_reason"))
+                            print("arrwaitingTime",self.arrwaitingTime)
+                    }
+                                                                      
+                }
+            if self.waiting_timeArray.count>0{
+                for dict in self.waiting_timeArray {
+                let newdict:NSMutableDictionary = dict as! NSMutableDictionary
+                self.arrTime.append(newdict.GetString(forKey: "time") + " " + "Minutes")
+                print("arrTime",self.arrTime)
+                }
             }
+            else{
+            PopUpView.addPopUpAlertView(MessageStringFile.whoopsText(), leftBtnTitle: MessageStringFile.okText(), rightBtnTitle: "", firstLblTitle: "Wrong Details", secondLblTitle: "")
+            PopUpView.sharedInstance.delegate = nil
         }
-        picker.allowMultipleSelection = false
-        
-        picker.show(withAnimation: .Fade)
-       }
+                    print("waiting_time",self.waiting_timeArray)
+                    print("waitingreasontime",self.waitingeasonArray)
+                    print("truckArray",self.truckArray)
+                     print("siteArray",self.siteArray)
+                    self.tblView.reloadData()
+                 }else{
+                 PopUpView.addPopUpAlertView(MessageStringFile.whoopsText(), leftBtnTitle: MessageStringFile.okText(), rightBtnTitle: "", firstLblTitle: "Wrong Details", secondLblTitle: "")
+                     PopUpView.sharedInstance.delegate = nil
+                 }
+             })
+         } else {
+             PopUpView.addPopUpAlertView(MessageStringFile.whoopsText(), leftBtnTitle:MessageStringFile.okText() , rightBtnTitle:"" , firstLblTitle: MessageStringFile.networkReachability(), secondLblTitle: "")
+             PopUpView.sharedInstance.delegate = nil
+         }
+     }
+    
+    
+    
+    
 }
 extension DailyReportVC: ImagePickerDelegate {
 
@@ -404,5 +538,63 @@ extension DailyReportVC: ImagePickerDelegate {
         self.imge.image = image
         btnpickImage.setTitle("Change Image", for: .normal)
         imgHieghtConst.constant = 200
+    }
+}
+class siteCell: UITableViewCell {
+    @IBOutlet weak var lblName: UILabel!
+    
+}
+extension DailyReportVC : UITableViewDelegate,UITableViewDataSource{
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (searchActive){
+           return  arrFiltered.count
+        }
+        return siteArray.count
+       
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
+        return 58
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "siteCell", for: indexPath) as! siteCell
+         let dict:NSMutableDictionary = self.siteArray.getNSMutableDictionary(atIndex: indexPath.row)
+        print("dictsitee",dict)
+        if(searchActive){
+             let dict:NSMutableDictionary = self.arrFiltered.getNSMutableDictionary(atIndex: indexPath.row)
+             cell.lblName.text = dict.GetString(forKey: "site")
+        }else{
+            cell.lblName.text = dict.GetString(forKey: "site")
+        }
+       
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let dict:NSMutableDictionary = self.siteArray.getNSMutableDictionary(atIndex: indexPath.row)
+        if(searchActive){
+             let dict:NSMutableDictionary = self.arrFiltered.getNSMutableDictionary(atIndex: indexPath.row)
+            btnSite.setTitle(dict.GetString(forKey: "site"), for: .normal)
+                             btnRate.setTitle(dict.GetString(forKey: "amount"), for: .normal)
+                             btnCity.setTitle(dict.GetString(forKey: "city"), for: .normal)
+                             btnCity.setTitleColor(.black, for: .normal)
+                             btnRate.setTitleColor(.black, for: .normal)
+                             btnSite.setTitleColor(.black, for: .normal)
+        }else{
+                btnSite.setTitle(dict.GetString(forKey: "site"), for: .normal)
+                  btnRate.setTitle(dict.GetString(forKey: "amount"), for: .normal)
+                  btnCity.setTitle(dict.GetString(forKey: "city"), for: .normal)
+                  btnCity.setTitleColor(.black, for: .normal)
+                  btnRate.setTitleColor(.black, for: .normal)
+                  btnSite.setTitleColor(.black, for: .normal)
+        }
+       
+        viewShowCity.isHidden = true
+        btnViewHide.isHidden = true
+        
+        
+       
     }
 }

@@ -6,6 +6,42 @@
 //  Copyright © 2020 Apple. All rights reserved.
 //
 
+/*example userid = 1, password = 123xyz
+
+result=>-1; Wrong User ID Or Password.
+result=>1; successfully login
+otherwise; some error
+
+GET ENRTY DATA API :
+            url : http://nafees.co/crm/mobileapp/getReportEntryData
+            post : appid
+
+SAVE REPORT API :
+            url : http://nafees.co/crm/mobileapp/saveDailyReport
+            post : appid,userid,driver_id,report_date,truck_no,order_no,city,site,site_amount,waiting_reason,waiting_time,waiting_time_amount,latitude,longitude,location,filename
+
+example    userid = 1,driver_id = xyz123, report_date = 2020-01-13, truck_no = 123456, order_no = 123asd, city = SANDIRASKO, site = 123456, site_amount = 450, waiting_reason = terminal shut down, waiting_time = 60, waiting_time_amount = 10, latitude = 22.7744, longitude = 47.1144, location = sadar colony, sandiras, pincode 234556
+
+if image add then send to filename in post;filename is image file
+
+result=>0; Order number is already existed.
+result=>1; Saved daily report.
+result=>-1; Failed to save daily report.
+otherwise; some error
+
+GET REPORT API :
+            url : http://nafees.co/crm/mobileapp/getReports
+            post : appid,userid,from_date,to_date
+
+example userid = 1, from_date = 2020-01-13, to_date = 2020-01-20
+
+GET INVOICE API :
+            url : http://nafees.co/crm/mobileapp/getInvoice
+            post : appid,userid
+
+example userid = 1*/
+
+
 import UIKit
 import CoreData
 import IQKeyboardManagerSwift
