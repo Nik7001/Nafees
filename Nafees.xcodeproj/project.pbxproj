@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		184D0B2C23CDBDDF00930D6A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D0B2B23CDBDDF00930D6A /* ImagePicker.swift */; };
 		184D0B2F23CDC3C700930D6A /* popoverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D0B2E23CDC3C700930D6A /* popoverVC.swift */; };
+		184D0B7123CDD63400930D6A /* YBTextPickerDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D0B6823CDD63400930D6A /* YBTextPickerDataModel.swift */; };
+		184D0B7223CDD63400930D6A /* YBTextPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184D0B6A23CDD63400930D6A /* YBTextPickerCell.xib */; };
+		184D0B7323CDD63400930D6A /* YBTextPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D0B6B23CDD63400930D6A /* YBTextPickerCell.swift */; };
+		184D0B7423CDD63400930D6A /* YBTextPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D0B6C23CDD63400930D6A /* YBTextPicker.swift */; };
+		184D0B7723CDD63400930D6A /* YBTextPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184D0B7023CDD63400930D6A /* YBTextPicker.xib */; };
 		1858A91023CADDD600F1D6C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858A90F23CADDD600F1D6C5 /* AppDelegate.swift */; };
 		1858A91223CADDD600F1D6C5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858A91123CADDD600F1D6C5 /* SceneDelegate.swift */; };
 		1858A91423CADDD600F1D6C5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858A91323CADDD600F1D6C5 /* ViewController.swift */; };
@@ -89,6 +94,11 @@
 /* Begin PBXFileReference section */
 		184D0B2B23CDBDDF00930D6A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		184D0B2E23CDC3C700930D6A /* popoverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popoverVC.swift; sourceTree = "<group>"; };
+		184D0B6823CDD63400930D6A /* YBTextPickerDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBTextPickerDataModel.swift; sourceTree = "<group>"; };
+		184D0B6A23CDD63400930D6A /* YBTextPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBTextPickerCell.xib; sourceTree = "<group>"; };
+		184D0B6B23CDD63400930D6A /* YBTextPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBTextPickerCell.swift; sourceTree = "<group>"; };
+		184D0B6C23CDD63400930D6A /* YBTextPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBTextPicker.swift; sourceTree = "<group>"; };
+		184D0B7023CDD63400930D6A /* YBTextPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBTextPicker.xib; sourceTree = "<group>"; };
 		1858A90C23CADDD600F1D6C5 /* Nafees.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nafees.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1858A90F23CADDD600F1D6C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1858A91123CADDD600F1D6C5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -218,6 +228,27 @@
 			path = popoverVC;
 			sourceTree = "<group>";
 		};
+		184D0B6723CDD63300930D6A /* YBTextPicker */ = {
+			isa = PBXGroup;
+			children = (
+				184D0B6823CDD63400930D6A /* YBTextPickerDataModel.swift */,
+				184D0B6923CDD63400930D6A /* YBTextPickerCell */,
+				184D0B6C23CDD63400930D6A /* YBTextPicker.swift */,
+				184D0B7023CDD63400930D6A /* YBTextPicker.xib */,
+			);
+			name = YBTextPicker;
+			path = "../../../../Downloads/YBTextPicker-master/YBTextPicker/YBTextPicker";
+			sourceTree = "<group>";
+		};
+		184D0B6923CDD63400930D6A /* YBTextPickerCell */ = {
+			isa = PBXGroup;
+			children = (
+				184D0B6A23CDD63400930D6A /* YBTextPickerCell.xib */,
+				184D0B6B23CDD63400930D6A /* YBTextPickerCell.swift */,
+			);
+			path = YBTextPickerCell;
+			sourceTree = "<group>";
+		};
 		1858A90323CADDD600F1D6C5 = {
 			isa = PBXGroup;
 			children = (
@@ -283,6 +314,7 @@
 		1866FD2223CB5FFD00507458 /* SupportedClasses */ = {
 			isa = PBXGroup;
 			children = (
+				184D0B6723CDD63300930D6A /* YBTextPicker */,
 				1866FD7F23CB609500507458 /* Extensions */,
 				187AB49823CC46AE00A8B095 /* AppColor */,
 				1866FD7C23CB608200507458 /* Loader */,
@@ -605,8 +637,10 @@
 			files = (
 				1858A91F23CADDD800F1D6C5 /* LaunchScreen.storyboard in Resources */,
 				1866FD7B23CB607C00507458 /* Rolling.gif in Resources */,
+				184D0B7223CDD63400930D6A /* YBTextPickerCell.xib in Resources */,
 				1858A91C23CADDD800F1D6C5 /* Assets.xcassets in Resources */,
 				1858A91723CADDD600F1D6C5 /* Main.storyboard in Resources */,
+				184D0B7723CDD63400930D6A /* YBTextPicker.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -741,6 +775,7 @@
 				187AB49323CC468E00A8B095 /* Reachability.swift in Sources */,
 				1858A91423CADDD600F1D6C5 /* ViewController.swift in Sources */,
 				1866FD7623CB607400507458 /* UIApplication.swift in Sources */,
+				184D0B7123CDD63400930D6A /* YBTextPickerDataModel.swift in Sources */,
 				1866FD8923CB609500507458 /* UIButtonExtension.swift in Sources */,
 				1866FDA123CB671600507458 /* HomeVC.swift in Sources */,
 				1866FD9023CB609500507458 /* DictionaryExtension.swift in Sources */,
@@ -762,6 +797,7 @@
 				1866FD5523CB606100507458 /* SDWebImagePrefetcher.m in Sources */,
 				1866FD7E23CB608300507458 /* SwiftLoader.swift in Sources */,
 				1866FD5623CB606100507458 /* SDImageCache.m in Sources */,
+				184D0B7423CDD63400930D6A /* YBTextPicker.swift in Sources */,
 				187AB4A123CC695900A8B095 /* DailyReportVC.swift in Sources */,
 				1866FD7223CB607400507458 /* SlideMenuController.swift in Sources */,
 				187AB49523CC468E00A8B095 /* MessageStringFile.swift in Sources */,
@@ -774,6 +810,7 @@
 				1866FD2623CB602700507458 /* WebService.m in Sources */,
 				1866FD5223CB606100507458 /* UIImage+GIF.m in Sources */,
 				1866FD4D23CB606100507458 /* MKAnnotationView+WebCache.m in Sources */,
+				184D0B7323CDD63400930D6A /* YBTextPickerCell.swift in Sources */,
 				1858A91023CADDD600F1D6C5 /* AppDelegate.swift in Sources */,
 				187AB49A23CC46AE00A8B095 /* AppColor.swift in Sources */,
 				1866FD7123CB607400507458 /* UIView.swift in Sources */,

@@ -26,7 +26,8 @@ class DailyReportVC: UIViewController,UITextFieldDelegate,UIPopoverPresentationC
     var toolBar = UIToolbar()
     var datePicker  = UIDatePicker()
     var imagePicker: ImagePicker!
-    
+    let regularFont = UIFont.systemFont(ofSize: 16)
+    let boldFont = UIFont.boldSystemFont(ofSize: 16)
     override func viewDidLoad() {
         super.viewDidLoad()
        setCornerRadious()
@@ -80,37 +81,37 @@ override func viewWillAppear(_ animated: Bool) {
          hideKeyBoard()
         toolBar.removeFromSuperview()
         datePicker.removeFromSuperview()
-        popoverShow()
+       truckNumberSelect()
     }
     
     @IBAction func btnSite(_ sender: Any) {
          hideKeyBoard()
         toolBar.removeFromSuperview()
         datePicker.removeFromSuperview()
+        site()
     }
     
     @IBAction func btnCity(_ sender: Any) {
-         hideKeyBoard()
-        toolBar.removeFromSuperview()
-        datePicker.removeFromSuperview()
+       
     }
     
     @IBAction func btnRate(_ sender: Any) {
-         hideKeyBoard()
-        toolBar.removeFromSuperview()
-        datePicker.removeFromSuperview()
+       
+      
     }
     
     @IBAction func btnTimeReason(_ sender: Any) {
          hideKeyBoard()
         toolBar.removeFromSuperview()
         datePicker.removeFromSuperview()
+        WaitingTimeReasion()
     }
     
     @IBAction func btnTime(_ sender: Any) {
          hideKeyBoard()
         toolBar.removeFromSuperview()
         datePicker.removeFromSuperview()
+        WaitingTime()
     }
     
     @IBAction func btnPickImage(_ sender: Any) {
@@ -167,6 +168,7 @@ override func viewWillAppear(_ animated: Bool) {
         let formatter = DateFormatter()
              formatter.dateFormat = "dd-MM-yyyy"
               btnCalender.setTitle(formatter.string(from: datePicker.date), for: .normal)
+        btnCalender.setTitleColor(.black, for: .normal)
         toolBar.removeFromSuperview()
         datePicker.removeFromSuperview()
     }
@@ -185,20 +187,216 @@ override func viewWillAppear(_ animated: Bool) {
         datePicker.removeFromSuperview()
     }
     
-    func popoverShow(){
-     let popover = storyboard?.instantiateViewController(withIdentifier: "popoverVC") as! popoverVC
-      popover.modalPresentationStyle = UIModalPresentationStyle.popover
-      popover.popoverPresentationController?.backgroundColor = UIColor.green
-      popover.popoverPresentationController?.delegate = self
-
-      popover.popoverPresentationController?.sourceView = self.view
-      popover.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
-
-      popover.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
-
-      self.present(popover, animated: true)
+    func truckNumberSelect(){
+    let blueAppearance = YBTextPickerAppearanceManager.init(
+         pickerTitle         : "Truck No.",
+         titleFont           : boldFont,
+         titleTextColor      : .black,
+         titleBackground     : .clear,
+         searchBarFont       : regularFont,
+         searchBarPlaceholder: "Search",
+         closeButtonTitle    : "Cancel",
+         closeButtonColor    : .darkGray,
+         closeButtonFont     : regularFont,
+         doneButtonTitle     : "Done",
+         doneButtonColor     : UIColor.systemBlue,
+         doneButtonFont      : boldFont,
+         itemColor           : .black,
+         itemFont            : regularFont
+     )
+     let fruits = ["Cherry", "Apricots", "Banana", "Blueberry", "Orange", "Apple", "Grapes", "Guava", "Mango", "Cherries", "Damson", "Grapefruit", "Pluot", "Plums", "Kiwi", "Peach", "Pear", "Pomegranate", "Starfruit", "Watermelon", "Pineapples"]
+     let picker = YBTextPicker.init(with: fruits, appearance: blueAppearance,
+                                    onCompletion: { (selectedIndexes, selectedValues) in
+                                     if selectedValues.count > 0{
+                                         
+                                         var values = [String]()
+                                         for index in selectedIndexes{
+                                             values.append(fruits[index])
+                                         }
+                                self.btnTruck.setTitle(values.joined(separator: ", "), for: .normal)
+                                    self.btnTruck.setTitleColor(.black, for: .normal)
+                                         
+                                     }else{
+                                         self.btnTruck.setTitle("Truck No.", for: .normal)
+                                        self.btnTruck.setTitleColor(.lightGray, for: .normal)
+                                     }
+     },
+                                    onCancel: {
+                                     print("Cancelled")
+                                        self.btnTruck.setTitle("Truck No.", for: .normal)
+                                   self.btnTruck.setTitleColor(.lightGray, for: .normal)
+     }
+     )
+     
+     if let title = btnTruck.title(for: .normal){
+         if title.contains(","){
+             picker.preSelectedValues = title.components(separatedBy: ", ")
+         }
+     }
+     picker.allowMultipleSelection = false
+     
+     picker.show(withAnimation: .Fade)
     }
     
+    func WaitingTimeReasion(){
+       let blueAppearance = YBTextPickerAppearanceManager.init(
+            pickerTitle         : "Truck No.",
+            titleFont           : boldFont,
+            titleTextColor      : .black,
+            titleBackground     : .clear,
+            searchBarFont       : regularFont,
+            searchBarPlaceholder: "Search",
+            closeButtonTitle    : "Cancel",
+            closeButtonColor    : .darkGray,
+            closeButtonFont     : regularFont,
+            doneButtonTitle     : "Done",
+            doneButtonColor     : UIColor.systemBlue,
+            doneButtonFont      : boldFont,
+            itemColor           : .black,
+            itemFont            : regularFont
+        )
+        let fruits = ["Cherry", "Apricots", "Banana", "Blueberry", "Orange", "Apple", "Grapes", "Guava", "Mango", "Cherries", "Damson", "Grapefruit", "Pluot", "Plums", "Kiwi", "Peach", "Pear", "Pomegranate", "Starfruit", "Watermelon", "Pineapples"]
+        let picker = YBTextPicker.init(with: fruits, appearance: blueAppearance,
+                                       onCompletion: { (selectedIndexes, selectedValues) in
+                                        if selectedValues.count > 0{
+                                            
+                                            var values = [String]()
+                                            for index in selectedIndexes{
+                                                values.append(fruits[index])
+                                            }
+                                   self.btnTruck.setTitle(values.joined(separator: ", "), for: .normal)
+                                       self.btnTruck.setTitleColor(.black, for: .normal)
+                                            
+                                        }else{
+                                            self.btnTruck.setTitle("Truck No.", for: .normal)
+                                           self.btnTruck.setTitleColor(.lightGray, for: .normal)
+                                        }
+        },
+                                       onCancel: {
+                                        print("Cancelled")
+                                           self.btnTruck.setTitle("Truck No.", for: .normal)
+                                      self.btnTruck.setTitleColor(.lightGray, for: .normal)
+        }
+        )
+        
+        if let title = btnTruck.title(for: .normal){
+            if title.contains(","){
+                picker.preSelectedValues = title.components(separatedBy: ", ")
+            }
+        }
+        picker.allowMultipleSelection = false
+        
+        picker.show(withAnimation: .Fade)
+       }
+    
+    func WaitingTime(){
+       let blueAppearance = YBTextPickerAppearanceManager.init(
+            pickerTitle         : "Truck No.",
+            titleFont           : boldFont,
+            titleTextColor      : .black,
+            titleBackground     : .clear,
+            searchBarFont       : regularFont,
+            searchBarPlaceholder: "Search",
+            closeButtonTitle    : "Cancel",
+            closeButtonColor    : .darkGray,
+            closeButtonFont     : regularFont,
+            doneButtonTitle     : "Done",
+            doneButtonColor     : UIColor.systemBlue,
+            doneButtonFont      : boldFont,
+            itemColor           : .black,
+            itemFont            : regularFont
+        )
+        let fruits = ["Cherry", "Apricots", "Banana", "Blueberry", "Orange", "Apple", "Grapes", "Guava", "Mango", "Cherries", "Damson", "Grapefruit", "Pluot", "Plums", "Kiwi", "Peach", "Pear", "Pomegranate", "Starfruit", "Watermelon", "Pineapples"]
+        let picker = YBTextPicker.init(with: fruits, appearance: blueAppearance,
+                                       onCompletion: { (selectedIndexes, selectedValues) in
+                                        if selectedValues.count > 0{
+                                            
+                                            var values = [String]()
+                                            for index in selectedIndexes{
+                                                values.append(fruits[index])
+                                            }
+                                   self.btnTruck.setTitle(values.joined(separator: ", "), for: .normal)
+                                       self.btnTruck.setTitleColor(.black, for: .normal)
+                                            
+                                        }else{
+                                            self.btnTruck.setTitle("Truck No.", for: .normal)
+                                           self.btnTruck.setTitleColor(.lightGray, for: .normal)
+                                        }
+        },
+                                       onCancel: {
+                                        print("Cancelled")
+                                           self.btnTruck.setTitle("Truck No.", for: .normal)
+                                      self.btnTruck.setTitleColor(.lightGray, for: .normal)
+        }
+        )
+        
+        if let title = btnTruck.title(for: .normal){
+            if title.contains(","){
+                picker.preSelectedValues = title.components(separatedBy: ", ")
+            }
+        }
+        picker.allowMultipleSelection = false
+        
+        picker.show(withAnimation: .Fade)
+       }
+    func site(){
+       let blueAppearance = YBTextPickerAppearanceManager.init(
+            pickerTitle         : "Truck No.",
+            titleFont           : boldFont,
+            titleTextColor      : .black,
+            titleBackground     : .clear,
+            searchBarFont       : regularFont,
+            searchBarPlaceholder: "Search",
+            closeButtonTitle    : "Cancel",
+            closeButtonColor    : .darkGray,
+            closeButtonFont     : regularFont,
+            doneButtonTitle     : "Done",
+            doneButtonColor     : UIColor.systemBlue,
+            doneButtonFont      : boldFont,
+            itemColor           : .black,
+            itemFont            : regularFont
+        )
+        let fruits = ["Cherry", "Apricots", "Banana", "Blueberry", "Orange", "Apple", "Grapes", "Guava", "Mango", "Cherries", "Damson", "Grapefruit", "Pluot", "Plums", "Kiwi", "Peach", "Pear", "Pomegranate", "Starfruit", "Watermelon", "Pineapples"]
+        let picker = YBTextPicker.init(with: fruits, appearance: blueAppearance,
+                                       onCompletion: { (selectedIndexes, selectedValues) in
+                                        if selectedValues.count > 0{
+                                            
+                                            var values = [String]()
+                                            for index in selectedIndexes{
+                                                values.append(fruits[index])
+                                            }
+                                   self.btnSite.setTitle(values.joined(separator: ", "), for: .normal)
+                                       self.btnSite.setTitleColor(.black, for: .normal)
+                                            
+                                        }else{
+                                             self.btnCity.setTitle("City", for: .normal)
+                                                                                self.btnCity.setTitleColor(.lightGray, for: .normal)
+                                                                                  self.btnRate.setTitle("City", for: .normal)
+                                                                                                                       self.btnRate.setTitleColor(.lightGray, for: .normal)
+                                                                                  self.btnSite.setTitle("City", for: .normal)
+                                                                                                                                          self.btnSite.setTitleColor(.lightGray, for: .normal)
+                                        }
+        },
+                                       onCancel: {
+                                        print("Cancelled")
+                                           self.btnCity.setTitle("City", for: .normal)
+                                      self.btnCity.setTitleColor(.lightGray, for: .normal)
+                                        self.btnRate.setTitle("City", for: .normal)
+                                                                             self.btnRate.setTitleColor(.lightGray, for: .normal)
+                                        self.btnSite.setTitle("City", for: .normal)
+                                                                                                self.btnSite.setTitleColor(.lightGray, for: .normal)
+        }
+        )
+        
+        if let title = btnTruck.title(for: .normal){
+            if title.contains(","){
+                picker.preSelectedValues = title.components(separatedBy: ", ")
+            }
+        }
+        picker.allowMultipleSelection = false
+        
+        picker.show(withAnimation: .Fade)
+       }
 }
 extension DailyReportVC: ImagePickerDelegate {
 
