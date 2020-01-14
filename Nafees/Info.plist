@@ -28,9 +28,9 @@
 	<key>NSCameraUsageDescription</key>
 	<string>This app will use camera.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Please allow access to save photo in your photo library</string>
+	<string>This app wants to take pictures</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>You can select photos to attach.</string>
+	<string>This app wants to use your photos</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

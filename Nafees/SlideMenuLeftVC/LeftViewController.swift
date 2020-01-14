@@ -8,8 +8,8 @@
 import UIKit
 
 enum LeftMenu: Int {
-    case home = 0
-    case Daily
+    
+    case Daily = 0
     case Weekly
     case Invoice
     case Logout
@@ -26,12 +26,11 @@ class LeftViewController : UIViewController, LeftMenuProtocol,PopUpViewDelegate 
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
-    var menus = ["Home","Daily Report", "Weekly Report","Invoice","Logout"]
+    var menus = ["Daily Report", "Weekly Report","Invoice","Logout"]
    
-    var menuImg = ["home","16-daily-report", "16-weekly-report","16-invoice","32-logout"]
+    var menuImg = ["16-daily-report", "16-weekly-report","16-invoice","32-logout"]
    
     var dailyVC: UIViewController!
-    var homeVC: UIViewController!
     var WeekVC: UIViewController!
     var InvoiceVC: UIViewController!
     var LogoutVC: UIViewController!
@@ -60,8 +59,6 @@ class LeftViewController : UIViewController, LeftMenuProtocol,PopUpViewDelegate 
 //        imgProfile.sd_setImage(with: URL(string:urlstring), placeholderImage: UIImage(named: "profileimg"))
       
       let storyboard = UIStoryboard(name: "Main", bundle: nil)
-       let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
-            self.homeVC = UINavigationController(rootViewController: homeVC)
         let DAILY = storyboard.instantiateViewController(withIdentifier: "DailyReportVC") as! DailyReportVC
         self.dailyVC = UINavigationController(rootViewController: DAILY)
        
@@ -101,16 +98,11 @@ class LeftViewController : UIViewController, LeftMenuProtocol,PopUpViewDelegate 
     
     func changeViewController(_ menu: LeftMenu) {
         switch menu {
-            case .home:
-        self.slideMenuController()?.changeMainViewController(self.homeVC, close: true)
-        
         case .Daily:
         self.slideMenuController()?.changeMainViewController(self.dailyVC, close: true)
             
         case .Weekly:
         self.slideMenuController()?.changeMainViewController(self.WeekVC, close: true)
-       
-       
         case .Invoice:
     self.slideMenuController()?.changeMainViewController(self.InvoiceVC, close: true)
         case .Logout:
@@ -218,7 +210,7 @@ extension LeftViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let menu = LeftMenu(rawValue: indexPath.row) {
             switch menu {
-            case .home,.Daily, .Weekly,.Invoice,.Logout:
+            case .Daily, .Weekly,.Invoice,.Logout:
                 return 48
             }
         }
@@ -253,7 +245,7 @@ extension LeftViewController : UITableViewDataSource {
         
         if let menu = LeftMenu(rawValue: indexPath.row) {
             switch menu {
-            case .home,.Daily, .Weekly,.Invoice,.Logout:
+            case .Daily, .Weekly,.Invoice,.Logout:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "BaseTableViewCell", for: indexPath) as! BaseTableViewCell
                
                 cell.lblName?.text = menus[indexPath.row]

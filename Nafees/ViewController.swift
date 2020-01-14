@@ -107,7 +107,7 @@ class ViewController: UIViewController {
                             let mainViewController = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
                             let leftViewController = storyboard.instantiateViewController(withIdentifier: "LeftViewController") as! LeftViewController
                             let nvc: UINavigationController = UINavigationController(rootViewController: mainViewController)
-                            leftViewController.homeVC = nvc
+                            leftViewController.dailyVC = nvc
                             let slideMenuController = SlideMenuController(mainViewController:nvc, leftMenuViewController: leftViewController)
                             slideMenuController.delegate = mainViewController
                             UIApplication.shared.windows.first?.rootViewController = slideMenuController

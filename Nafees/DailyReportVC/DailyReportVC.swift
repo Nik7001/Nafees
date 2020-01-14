@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DailyReportVC: UIViewController {
+class DailyReportVC: UIViewController,UITextFieldDelegate,UIPopoverPresentationControllerDelegate {
 
     @IBOutlet weak var viewText: UIView!
     @IBOutlet weak var txtOrderNumber: UITextField!
@@ -23,18 +23,24 @@ class DailyReportVC: UIViewController {
     @IBOutlet weak var btnSite: UIButton!
     @IBOutlet weak var btnTruck: UIButton!
     @IBOutlet weak var btnCalender: UIButton!
+    var toolBar = UIToolbar()
+    var datePicker  = UIDatePicker()
+    var imagePicker: ImagePicker!
     
     override func viewDidLoad() {
         super.viewDidLoad()
        setCornerRadious()
         imgHieghtConst.constant = 0
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy"
+        btnCalender.setTitle(formatter.string(from: Date()), for: .normal)
+         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
         // Do any additional setup after loading the view.
     }
 override func viewWillAppear(_ animated: Bool) {
-                 super.viewWillAppear(animated)
-            self.setNavigationBarItem()
-              self.title = "DAILY REPORT"
-          }
+        super.viewWillAppear(animated)
+    self.navigationController?.navigationBar.isHidden = true
+        }
 
     func setCornerRadious(){
         viewText.setCornerRadiousAndBorder(.systemTeal, borderWidth: 1.0, cornerRadius: viewText.frame.size.height/2)
@@ -54,49 +60,151 @@ override func viewWillAppear(_ animated: Bool) {
     
     
     @IBAction func btnBack(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainViewController = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
+        let leftViewController = storyboard.instantiateViewController(withIdentifier: "LeftViewController") as! LeftViewController
+        let nvc: UINavigationController = UINavigationController(rootViewController: mainViewController)
+        leftViewController.dailyVC = nvc
+        let slideMenuController = SlideMenuController(mainViewController:nvc, leftMenuViewController: leftViewController)
+        slideMenuController.delegate = mainViewController
+        UIApplication.shared.windows.first?.rootViewController = slideMenuController
+        UIApplication.shared.windows.first?.makeKeyAndVisible()
     }
     
     @IBAction func btnCalendr(_ sender: Any) {
+       showDatePicker()
          hideKeyBoard()
     }
     
     @IBAction func btnTruckNumber(_ sender: Any) {
          hideKeyBoard()
+        toolBar.removeFromSuperview()
+        datePicker.removeFromSuperview()
+        popoverShow()
     }
     
     @IBAction func btnSite(_ sender: Any) {
          hideKeyBoard()
+        toolBar.removeFromSuperview()
+        datePicker.removeFromSuperview()
     }
     
     @IBAction func btnCity(_ sender: Any) {
          hideKeyBoard()
+        toolBar.removeFromSuperview()
+        datePicker.removeFromSuperview()
     }
     
     @IBAction func btnRate(_ sender: Any) {
          hideKeyBoard()
+        toolBar.removeFromSuperview()
+        datePicker.removeFromSuperview()
     }
     
     @IBAction func btnTimeReason(_ sender: Any) {
          hideKeyBoard()
+        toolBar.removeFromSuperview()
+        datePicker.removeFromSuperview()
     }
     
     @IBAction func btnTime(_ sender: Any) {
          hideKeyBoard()
+        toolBar.removeFromSuperview()
+        datePicker.removeFromSuperview()
     }
     
     @IBAction func btnPickImage(_ sender: Any) {
          hideKeyBoard()
+        toolBar.removeFromSuperview()
+        datePicker.removeFromSuperview()
+        self.imagePicker.present(from: sender as! UIView)
     }
     
     @IBAction func btnSubmit(_ sender: Any) {
          hideKeyBoard()
+        toolBar.removeFromSuperview()
+        datePicker.removeFromSuperview()
     }
     
     //MARK:- Functions >>>>>>>>>>>>>
     func hideKeyBoard(){
         txtOrderNumber.resignFirstResponder()
-       
+    }
+    func showDatePicker() {
+        datePicker = UIDatePicker.init()
+        datePicker.backgroundColor = UIColor.white
+
+        datePicker.autoresizingMask = .flexibleWidth
+        datePicker.datePickerMode = .date
+
+        datePicker.addTarget(self, action: #selector(self.dateChanged(_:)), for: .valueChanged)
+        datePicker.frame = CGRect(x: 0.0, y: UIScreen.main.bounds.size.height - 300, width: UIScreen.main.bounds.size.width, height: 300)
+        self.view.addSubview(datePicker)
+
+        toolBar = UIToolbar(frame: CGRect(x: 0, y: UIScreen.main.bounds.size.height - 300, width: UIScreen.main.bounds.size.width, height: 50))
+        toolBar.barStyle = .blackTranslucent
+        toolBar.backgroundColor = UIColor.systemBlue
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelBarButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
+        cancelBarButton.tintColor = UIColor.white
+        let doneBarButton = UIBarButtonItem(title: "Done", style: .plain, target: target, action: #selector(onDoneButtonClick))
+        doneBarButton.tintColor = UIColor.white
+        toolBar.setItems([cancelBarButton, flexibleSpace, doneBarButton], animated: false)
+        toolBar.sizeToFit()
+        self.view.addSubview(toolBar)
+    }
+
+    @objc func dateChanged(_ sender: UIDatePicker?) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .none
+        if let date = sender?.date {
+            print("Picked the date \(dateFormatter.string(from: date))")
+        }
+    }
+
+    @objc func onDoneButtonClick() {
+        let formatter = DateFormatter()
+             formatter.dateFormat = "dd-MM-yyyy"
+              btnCalender.setTitle(formatter.string(from: datePicker.date), for: .normal)
+        toolBar.removeFromSuperview()
+        datePicker.removeFromSuperview()
+    }
+
+    @objc func cancelDatePicker(){
+        toolBar.removeFromSuperview()
+        datePicker.removeFromSuperview()
+        let formatter = DateFormatter()
+            formatter.dateFormat = "dd-MM-yyyy"
+         btnCalender.setTitle(formatter.string(from:Date()), for: .normal)
+       self.view.endEditing(true)
+     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        toolBar.removeFromSuperview()
+        datePicker.removeFromSuperview()
     }
     
+    func popoverShow(){
+     let popover = storyboard?.instantiateViewController(withIdentifier: "popoverVC") as! popoverVC
+      popover.modalPresentationStyle = UIModalPresentationStyle.popover
+      popover.popoverPresentationController?.backgroundColor = UIColor.green
+      popover.popoverPresentationController?.delegate = self
+
+      popover.popoverPresentationController?.sourceView = self.view
+      popover.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+
+      popover.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+
+      self.present(popover, animated: true)
+    }
+    
+}
+extension DailyReportVC: ImagePickerDelegate {
+
+    func didSelect(image: UIImage?) {
+        self.imge.image = image
+        btnpickImage.setTitle("Change Image", for: .normal)
+        imgHieghtConst.constant = 200
+    }
 }

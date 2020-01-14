@@ -31,12 +31,18 @@ class HomeVC: UIViewController,SlideMenuControllerDelegate {
            }
     
     @IBAction func btnWeekly(_ sender: Any) {
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "WeeklyReportVC") as? WeeklyReportVC
+        self.navigationController?.pushViewController(vc!, animated: true)
     }
     
     @IBAction func btnInvoice(_ sender: Any) {
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "InvoiceVC") as? InvoiceVC
+        self.navigationController?.pushViewController(vc!, animated: true)
     }
     
     @IBAction func btnDailyReport(_ sender: Any) {
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "DailyReportVC") as? DailyReportVC
+        self.navigationController?.pushViewController(vc!, animated: true)
     }
     
     /*

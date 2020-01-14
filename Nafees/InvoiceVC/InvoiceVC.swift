@@ -16,11 +16,21 @@ class InvoiceVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
-           super.viewWillAppear(animated)
-      self.setNavigationBarItem()
-        self.title = "INVOICE"
+        super.viewWillAppear(animated)
+    self.navigationController?.navigationBar.isHidden = true
     }
 
+    @IBAction func btnBack(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainViewController = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
+        let leftViewController = storyboard.instantiateViewController(withIdentifier: "LeftViewController") as! LeftViewController
+        let nvc: UINavigationController = UINavigationController(rootViewController: mainViewController)
+        leftViewController.dailyVC = nvc
+        let slideMenuController = SlideMenuController(mainViewController:nvc, leftMenuViewController: leftViewController)
+        slideMenuController.delegate = mainViewController
+        UIApplication.shared.windows.first?.rootViewController = slideMenuController
+        UIApplication.shared.windows.first?.makeKeyAndVisible()
+    }
     /*
     // MARK: - Navigation
 
