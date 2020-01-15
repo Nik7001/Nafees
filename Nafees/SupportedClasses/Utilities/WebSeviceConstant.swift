@@ -53,70 +53,23 @@ class WebServicesLink: NSObject {
             return (baseUrl + "getReportEntryData")
         }
     }
-    class var creditreports: String {
+    class var saveDailyReport: String {
            get {
-               return (baseUrl + "credit-reports")
+               return (baseUrl + "saveDailyReport")
            }
        }
-    
-   
-   
-    class var ForgotPassword: String {
+    class var getInvoice: String {
         get {
-            return (baseUrl + "customer/api_forgot_password?")
+            return (baseUrl + "getInvoice")
         }
     }
-    
-    class var addFavAddress: String {
-        get {
-            return (baseUrl + "address/api_add?")
-        }
-    }
-    
-    class var GetFavAddress: String {
-        get {
-            return (baseUrl + "address/api_view?")
-        }
-    }
-    
-    class var DeleteFavAddress: String {
-        get {
-            return (baseUrl + "address/api_delete?")
-        }
-    }
+  
     class var log_out: String {
         get {
             return (baseUrl + "customer/customer/api_logout?")
         }
     }
-    
-    class var category_list: String {
-        get {
-            return (baseUrl + "reward/api_all_category?")
-        }
-    }
-    class var redeem_list: String {
-        get {
-            return (baseUrl + "reward/reward/api_redim?")
-        }
-
-    }
-    class var redeem_history: String {
-        get {
-            return (baseUrl + "reward/api_redim_history?")
-        }
-    }
-    class var all_notification: String {
-        get {
-            return (baseUrl + "push/api_all?")
-        }
-    }
-    class var upload_ticket: String {
-        get {
-            return (baseUrl + "reward/api_add_ticket?")
-        }
-    }
-    
+   
     
 }
 class WebServiceConstant: NSObject {

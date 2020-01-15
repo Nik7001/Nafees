@@ -14,6 +14,9 @@
 		1817327C23CE121100B33D80 /* YBTextPicker_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 1817327523CE121100B33D80 /* YBTextPicker_unchecked.png */; };
 		1817327D23CE121100B33D80 /* YBTextPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1817327623CE121100B33D80 /* YBTextPicker.xib */; };
 		1817327F23CE2BBC00B33D80 /* YBTextPickerDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1817327E23CE2BBB00B33D80 /* YBTextPickerDataModel.swift */; };
+		1820A7EB23CF260000752D72 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1820A7EA23CF25FF00752D72 /* CoreLocation.framework */; };
+		1820A7ED23CF285B00752D72 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1820A7EC23CF285B00752D72 /* LocationManager.swift */; };
+		1820A7F023CF368900752D72 /* InVoicePdfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1820A7EF23CF368900752D72 /* InVoicePdfView.swift */; };
 		184D0B2C23CDBDDF00930D6A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D0B2B23CDBDDF00930D6A /* ImagePicker.swift */; };
 		184D0B2F23CDC3C700930D6A /* popoverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D0B2E23CDC3C700930D6A /* popoverVC.swift */; };
 		1858A91023CADDD600F1D6C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858A90F23CADDD600F1D6C5 /* AppDelegate.swift */; };
@@ -101,6 +104,9 @@
 		1817327523CE121100B33D80 /* YBTextPicker_unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YBTextPicker_unchecked.png; sourceTree = "<group>"; };
 		1817327623CE121100B33D80 /* YBTextPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBTextPicker.xib; sourceTree = "<group>"; };
 		1817327E23CE2BBB00B33D80 /* YBTextPickerDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBTextPickerDataModel.swift; sourceTree = "<group>"; };
+		1820A7EA23CF25FF00752D72 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		1820A7EC23CF285B00752D72 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		1820A7EF23CF368900752D72 /* InVoicePdfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InVoicePdfView.swift; sourceTree = "<group>"; };
 		184D0B2B23CDBDDF00930D6A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		184D0B2E23CDC3C700930D6A /* popoverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popoverVC.swift; sourceTree = "<group>"; };
 		1858A90C23CADDD600F1D6C5 /* Nafees.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nafees.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,6 +207,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1820A7EB23CF260000752D72 /* CoreLocation.framework in Frameworks */,
 				F4EC270BE9E2F93FE727D44B /* Pods_Nafees.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,10 +261,19 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		1820A7EE23CF363800752D72 /* InvoicePdfViewVC */ = {
+			isa = PBXGroup;
+			children = (
+				1820A7EF23CF368900752D72 /* InVoicePdfView.swift */,
+			);
+			path = InvoicePdfViewVC;
+			sourceTree = "<group>";
+		};
 		184D0B2D23CDC39C00930D6A /* popoverVC */ = {
 			isa = PBXGroup;
 			children = (
 				184D0B2E23CDC3C700930D6A /* popoverVC.swift */,
+				1820A7EE23CF363800752D72 /* InvoicePdfViewVC */,
 			);
 			path = popoverVC;
 			sourceTree = "<group>";
@@ -430,6 +446,7 @@
 				1866FD8223CB609500507458 /* ArrayExtension.swift */,
 				1866FD8323CB609500507458 /* UIViewExtension.swift */,
 				1866FD8523CB609500507458 /* StringExtension.swift */,
+				1820A7EC23CF285B00752D72 /* LocationManager.swift */,
 				1866FD8723CB609500507458 /* DictionaryExtension.swift */,
 			);
 			path = Extensions;
@@ -518,6 +535,7 @@
 		8BF35713AF76CA7BBFAE6C85 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1820A7EA23CF25FF00752D72 /* CoreLocation.framework */,
 				2C8DE637050CC7C301270E1A /* Pods_Nafees.framework */,
 				75BDE1D8130A3476C20E224A /* Pods_Nafees_NafeesUITests.framework */,
 				1952D6CD6EA99F28618A6B95 /* Pods_NafeesTests.framework */,
@@ -824,12 +842,14 @@
 				1866FD7323CB607400507458 /* UITableViewExtension.swift in Sources */,
 				1866FD2623CB602700507458 /* WebService.m in Sources */,
 				1866FD5223CB606100507458 /* UIImage+GIF.m in Sources */,
+				1820A7F023CF368900752D72 /* InVoicePdfView.swift in Sources */,
 				1866FD4D23CB606100507458 /* MKAnnotationView+WebCache.m in Sources */,
 				1817327923CE121100B33D80 /* YBTextPickerCell.swift in Sources */,
 				1858A91023CADDD600F1D6C5 /* AppDelegate.swift in Sources */,
 				187AB49A23CC46AE00A8B095 /* AppColor.swift in Sources */,
 				1866FD7123CB607400507458 /* UIView.swift in Sources */,
 				184D0B2F23CDC3C700930D6A /* popoverVC.swift in Sources */,
+				1820A7ED23CF285B00752D72 /* LocationManager.swift in Sources */,
 				187AB49E23CC46BE00A8B095 /* UIImage+fixOrientation.m in Sources */,
 				1866FD4F23CB606100507458 /* SDWebImageDecoder.m in Sources */,
 				1866FD8E23CB609500507458 /* StringExtension.swift in Sources */,

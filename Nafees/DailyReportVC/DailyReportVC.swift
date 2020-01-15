@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CoreLocation
 class DailyReportVC: UIViewController,UITextFieldDelegate,UISearchBarDelegate{
 
     @IBOutlet weak var tblView: UITableView!
@@ -27,17 +27,25 @@ class DailyReportVC: UIViewController,UITextFieldDelegate,UISearchBarDelegate{
     @IBOutlet weak var btnSite: UIButton!
     @IBOutlet weak var btnTruck: UIButton!
     @IBOutlet weak var btnCalender: UIButton!
+    let locationManager = LocationManager()
+    var latitude  = String()
+    var longitude  = String()
+    var location  = String()
+    var zipcode  = String()
+    
     var toolBar = UIToolbar()
     var datePicker  = UIDatePicker()
     var imagePicker: ImagePicker!
     let regularFont = UIFont.systemFont(ofSize: 16)
     let boldFont = UIFont.boldSystemFont(ofSize: 16)
     var strUrl = String()
-   
+    var WaitinAmount = String()
+    var ButtonType = ""
     var waitingeasonArray = NSMutableArray()
-    var waiting_timeArray = NSMutableArray()
+    var waiting_timeArray = NSArray()
     var siteArray = NSArray()
         var arrFiltered = NSArray()
+         var arrSiteFiltered = NSArray()
        var searchActive : Bool = false
     var truckArray = NSMutableArray()
     var arrTruck = [String]()
@@ -65,6 +73,7 @@ class DailyReportVC: UIViewController,UITextFieldDelegate,UISearchBarDelegate{
             btnRate.setTitle("Rate", for:.normal)
             btnSite.setTitle("Site", for:.normal)
          searchBar.delegate = self
+       self.setCurrentLocation()
         // Do any additional setup after loading the view.
     }
 override func viewWillAppear(_ animated: Bool) {
@@ -97,11 +106,13 @@ override func viewWillAppear(_ animated: Bool) {
                   btnCity.setTitle("City", for:.normal)
                   btnRate.setTitle("Rate", for:.normal)
                   btnSite.setTitle("Site", for:.normal)
+        self.searchBar.resignFirstResponder()
     }
     
     @IBAction func btnOk(_ sender: Any) {
         viewShowCity.isHidden = true
         btnViewHide.isHidden = true
+        self.searchBar.resignFirstResponder()
         btnCity.setTitleColor(.lightGray, for: .normal)
                      btnRate.setTitleColor(.lightGray, for: .normal)
                      btnSite.setTitleColor(.lightGray, for: .normal)
@@ -113,6 +124,7 @@ override func viewWillAppear(_ animated: Bool) {
     @IBAction func btnHide(_ sender: Any) {
         viewShowCity.isHidden = true
         btnViewHide.isHidden = true
+        self.searchBar.resignFirstResponder()
     }
     
     
@@ -131,16 +143,45 @@ override func viewWillAppear(_ animated: Bool) {
         UIApplication.shared.windows.first?.makeKeyAndVisible()
     }
     
-    
-     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-    //        searchActive = false;
-    //        self.searchBar.resignFirstResponder()
-    //
-    //        DispatchQueue.main.async(execute: {
-    //            self.tblfavContact.reloadData()
-    //        })
+     private func setCurrentLocation() {
             
+            guard let exposedLocation = self.locationManager.exposedLocation else {
+                print("*** Error in \(#function): exposedLocation is nil")
+                return
+            }
+            
+            self.locationManager.getPlace(for: exposedLocation) { placemark in
+                guard let placemark = placemark else { return }
+                
+                var output = "Our location is:"
+                if let country = placemark.country {
+                    output = output + "\n\(country)"
+                }
+                if let state = placemark.administrativeArea {
+                    output = output + "\n\(state)"
+                }
+                if let town = placemark.locality {
+                    output = output + "\n\(town)"
+                }
+                if let zipcode = placemark.postalCode {
+                 self.zipcode = zipcode
+                }
+                self.location = output
+                self.latitude = "\(placemark.location!.coordinate.latitude)"
+                self.longitude = "\(placemark.location!.coordinate.longitude)"
+                print("location",self.location)
+                print("latitude",self.latitude)
+                print("longitude",self.longitude)
+            }
         }
+     
+   
+    
+ 
+    
+
+    
+    ////// SearchBar Delegate
         
         func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
             searchActive = false;
@@ -161,10 +202,10 @@ override func viewWillAppear(_ animated: Bool) {
         }
         
         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-            
+            if  ButtonType == "WaitingTime"{
             if searchText != "" {
-                let searchPredicate = NSPredicate(format: "site CONTAINS[C] %@", searchBar.text!)
-                arrFiltered = (siteArray as
+                let searchPredicate = NSPredicate(format: "time CONTAINS[C] %@", searchBar.text!)
+                arrFiltered = (waiting_timeArray as
                     NSArray).filtered(using: searchPredicate) as NSArray
                 
                 if(arrFiltered.count == 0){
@@ -179,9 +220,27 @@ override func viewWillAppear(_ animated: Bool) {
             DispatchQueue.main.async(execute: {
                 self.tblView.reloadData()
             })
-            
-            
-            
+            }
+            else{
+                if searchText != "" {
+                    let searchPredicate = NSPredicate(format: "site CONTAINS[C] %@", searchBar.text!)
+                    arrSiteFiltered = (siteArray as
+                        NSArray).filtered(using: searchPredicate) as NSArray
+                    
+                    if(arrSiteFiltered.count == 0){
+                        searchActive = true;
+                    } else {
+                        searchActive = true;
+                    }
+                } else {
+                    searchActive = false;
+                }
+                
+                DispatchQueue.main.async(execute: {
+                    self.tblView.reloadData()
+                })
+                }
+           
         }
     private func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
            searchActive = true;
@@ -201,10 +260,14 @@ override func viewWillAppear(_ animated: Bool) {
     
     @IBAction func btnSite(_ sender: Any) {
          hideKeyBoard()
+        
         toolBar.removeFromSuperview()
         datePicker.removeFromSuperview()
         viewShowCity.isHidden = false
         btnViewHide.isHidden = false
+        ButtonType = ""
+        tblView.reloadData()
+       
     }
     
     @IBAction func btnCity(_ sender: Any) {
@@ -225,9 +288,13 @@ override func viewWillAppear(_ animated: Bool) {
     
     @IBAction func btnTime(_ sender: Any) {
          hideKeyBoard()
+       
         toolBar.removeFromSuperview()
         datePicker.removeFromSuperview()
-        WaitingTime()
+        ButtonType = "WaitingTime"
+        viewShowCity.isHidden = false
+        btnViewHide.isHidden = false
+          tblView.reloadData()
     }
     
     @IBAction func btnPickImage(_ sender: Any) {
@@ -241,11 +308,41 @@ override func viewWillAppear(_ animated: Bool) {
          hideKeyBoard()
         toolBar.removeFromSuperview()
         datePicker.removeFromSuperview()
+        
+       if btnSite.currentTitle == "Site"{
+        showAlert(title: "Alert", message: "Select Site")
+            
+        }
+        else if btnRate.currentTitle == "Rate"{
+         showAlert(title: "Alert", message: "Select Rate")
+            
+        }
+        else if btnCity.currentTitle == "City"{
+          showAlert(title: "Alert", message: "Select City")
+                   
+            }
+        else if btnTruck.currentTitle == "Truck No."{
+         showAlert(title: "Alert", message: "Select Truck No.")
+        }
+        else if btnWaitingTImeR.currentTitle == "Waiting Time Reason"{
+        showAlert(title: "Alert", message: "Select Waiting Time Reason")
+                                 
+            }
+        else if btnTime.currentTitle == "Waiting Time"{
+                 showAlert(title: "Alert", message: "Select Waiting Time ")
+        }
+        else if txtOrderNumber.text == ""{
+              showAlert(title: "Alert", message: "Select OrderNo.")
+       }
+       else{
+         WS_SaveDailyReport()
+        }
     }
     
     //MARK:- Functions >>>>>>>>>>>>>
     func hideKeyBoard(){
         txtOrderNumber.resignFirstResponder()
+        self.searchBar.resignFirstResponder()
     }
     func showDatePicker() {
         datePicker = UIDatePicker.init()
@@ -405,56 +502,6 @@ override func viewWillAppear(_ animated: Bool) {
         picker.show(withAnimation: .Fade)
        }
     
-    func WaitingTime(){
-       let blueAppearance = YBTextPickerAppearanceManager.init(
-            pickerTitle         : "WaitingTime.",
-            titleFont           : boldFont,
-            titleTextColor      : .black,
-            titleBackground     : .clear,
-            searchBarFont       : regularFont,
-            searchBarPlaceholder: "Search",
-            closeButtonTitle    : "Cancel",
-            closeButtonColor    : .darkGray,
-            closeButtonFont     : regularFont,
-            doneButtonTitle     : "Done",
-            doneButtonColor     : UIColor.systemBlue,
-            doneButtonFont      : boldFont,
-            itemColor           : .black,
-            itemFont            : regularFont
-        )
-        let picker = YBTextPicker.init(with: arrTime, appearance: blueAppearance,
-                                       onCompletion: { (selectedIndexes, selectedValues) in
-                                        if selectedValues.count > 0{
-                                            
-                                            var values = [String]()
-                                            for index in selectedIndexes{
-                                                values.append(self.arrTime[index])
-                                            }
-                                   self.btnTime.setTitle(values.joined(separator: ", ") , for: .normal)
-                                       self.btnTime.setTitleColor(.black, for: .normal)
-                                            
-                                        }else{
-                                            self.btnTime.setTitle("Waiting Time", for: .normal)
-                                           self.btnTime.setTitleColor(.lightGray, for: .normal)
-                                        }
-        },
-                                       onCancel: {
-                                        print("Cancelled")
-                                           self.btnTime.setTitle("Waiting Time", for: .normal)
-                                      self.btnTime.setTitleColor(.lightGray, for: .normal)
-        }
-        )
-        
-        if let title = btnTruck.title(for: .normal){
-            if title.contains(","){
-                picker.preSelectedValues = title.components(separatedBy: ", ")
-            }
-        }
-        picker.allowMultipleSelection = false
-        
-        picker.show(withAnimation: .Fade)
-       }
-   
     func WS_GetReport(){
     
          if HelperClass.isInternetAvailable {
@@ -528,7 +575,70 @@ override func viewWillAppear(_ animated: Bool) {
          }
      }
     
+  func WS_SaveDailyReport(){
     
+         if HelperClass.isInternetAvailable {
+            
+            let userdict = AppUserDefault.getUserDetails()
+            let driverId = userdict.GetString(forKey: "driver_id")
+             let userId = userdict.GetInt(forKey: "id")
+             
+             SwiftLoader.show(animated: true)
+             var param = [String:Any]()
+             strUrl = WebServicesLink.saveDailyReport
+            
+            param = ["userid":userId,"driver_id":driverId,"report_date":btnCalender.currentTitle!,"truck_no":btnTruck.currentTitle!,"order_no":txtOrderNumber.text ?? "","city":btnCity.currentTitle!,"site":btnSite.currentTitle!,"site_amount":btnRate.currentTitle!,"waiting_reason":btnWaitingTImeR.currentTitle!,"waiting_time":btnTime.currentTitle!,"waiting_time_amount":WaitinAmount,"latitude":latitude,"longitude":longitude,"location":location,"pincode":zipcode]
+           
+             print("strUrl >>>>>>>>>>\(strUrl)")
+            print("Param >>>>>>>>>>",param)
+             
+             WebService.createRequestAndGetResponse(strUrl, methodType: .POST, andHeaderDict:[:], andParameterDict:param, onCompletion: { (dictResponse,error,reply,statusCode) in
+                 SwiftLoader.hide()
+                 print("dictResponse >>>\(String(describing: dictResponse))")
+                 print("error >>>\(String(describing: error))")
+                 print("reply >>>\(String(describing: reply))")
+                 print("statuscode >>>\(String(describing: statusCode))")
+                 
+                 let json = dictResponse! as[String: Any] as NSDictionary
+                 print("json>>>>\(json)")
+                 var msg = ""
+                 msg = json.GetString(forKey: WebServiceConstant.msg)
+                 if msg == "" {
+                     msg = MessageStringFile.serverError()
+                 }
+                 if json.count > 0{
+                     let Status:Int = json.GetInt(forKey: "result")
+                    if "\(Status)" == "-1"{
+                                PopUpView.addPopUpAlertView(MessageStringFile.whoopsText(), leftBtnTitle: MessageStringFile.okText(), rightBtnTitle: "", firstLblTitle: "Wrong Information", secondLblTitle: "")
+                                               PopUpView.sharedInstance.delegate = nil
+                                           }else{
+                   PopUpView.addPopUpAlertView("Success", leftBtnTitle: MessageStringFile.okText(), rightBtnTitle: "", firstLblTitle: "SavedReports", secondLblTitle: "")
+                   PopUpView.sharedInstance.delegate = nil
+                        self.btnWaitingTImeR.setTitle("Waiting Time Reason", for: .normal)
+                        self.btnWaitingTImeR.setTitleColor(.lightGray, for: .normal)
+                        self.btnCity.setTitle("City", for: .normal)
+                        self.btnCity.setTitleColor(.lightGray, for: .normal)
+                        self.btnRate.setTitle("Rate", for: .normal)
+                        self.btnRate.setTitleColor(.lightGray, for: .normal)
+                        self.btnSite.setTitle("Site", for: .normal)
+                        self.btnSite.setTitleColor(.lightGray, for: .normal)
+                        self.btnTime.setTitle("Site", for: .normal)
+                        self.btnTime.setTitleColor(.lightGray, for: .normal)
+                        self.txtOrderNumber.text = ""
+                        self.txtOrderNumber.placeholder = "Order No."
+                    }
+                    
+                 }
+           else{
+                 PopUpView.addPopUpAlertView(MessageStringFile.whoopsText(), leftBtnTitle: MessageStringFile.okText(), rightBtnTitle: "", firstLblTitle: "Wrong Details", secondLblTitle: "")
+                     PopUpView.sharedInstance.delegate = nil
+                 }
+             })
+         } else {
+             PopUpView.addPopUpAlertView(MessageStringFile.whoopsText(), leftBtnTitle:MessageStringFile.okText() , rightBtnTitle:"" , firstLblTitle: MessageStringFile.networkReachability(), secondLblTitle: "")
+             PopUpView.sharedInstance.delegate = nil
+         }
+     }
     
     
 }
@@ -549,52 +659,97 @@ extension DailyReportVC : UITableViewDelegate,UITableViewDataSource{
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (searchActive){
-           return  arrFiltered.count
+        if  ButtonType == "WaitingTime"{
+            if (searchActive){
+                      return  arrFiltered.count
+                   }
+                   return waiting_timeArray.count
+        }else{
+            if (searchActive){
+               return  arrSiteFiltered.count
+            }
+            return siteArray.count
         }
-        return siteArray.count
-       
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         return 58
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "siteCell", for: indexPath) as! siteCell
-         let dict:NSMutableDictionary = self.siteArray.getNSMutableDictionary(atIndex: indexPath.row)
-        print("dictsitee",dict)
+        if  ButtonType == "WaitingTime"{
+        let dict:NSMutableDictionary = self.waiting_timeArray.getNSMutableDictionary(atIndex: indexPath.row)
         if(searchActive){
              let dict:NSMutableDictionary = self.arrFiltered.getNSMutableDictionary(atIndex: indexPath.row)
-             cell.lblName.text = dict.GetString(forKey: "site")
+             cell.lblName.text = dict.GetString(forKey: "time")
+            WaitinAmount = dict.GetString(forKey: "cost")
         }else{
-            cell.lblName.text = dict.GetString(forKey: "site")
+            cell.lblName.text = dict.GetString(forKey: "time")
+            
         }
-       
+        }else{
+            let dict:NSMutableDictionary = self.siteArray.getNSMutableDictionary(atIndex: indexPath.row)
+                   if(searchActive){
+                        let dict:NSMutableDictionary = self.arrSiteFiltered.getNSMutableDictionary(atIndex: indexPath.row)
+                        cell.lblName.text = dict.GetString(forKey: "site")
+                   }else{
+                       cell.lblName.text = dict.GetString(forKey: "site")
+                   }
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let dict:NSMutableDictionary = self.siteArray.getNSMutableDictionary(atIndex: indexPath.row)
+       
+         if  ButtonType == "WaitingTime"{
         if(searchActive){
              let dict:NSMutableDictionary = self.arrFiltered.getNSMutableDictionary(atIndex: indexPath.row)
-            btnSite.setTitle(dict.GetString(forKey: "site"), for: .normal)
+                    btnTime.setTitle(dict.GetString(forKey: "time") + " " + "Minutes", for: .normal)
+                                           btnTime.setTitleColor(.black, for: .normal)
+             WaitinAmount = dict.GetString(forKey: "cost")
+                           
+        }else{
+             let dict:NSMutableDictionary = self.waiting_timeArray.getNSMutableDictionary(atIndex: indexPath.row)
+                btnTime.setTitle(dict.GetString(forKey: "time") + " " + "Minutes", for: .normal)
+                btnTime.setTitleColor(.black, for: .normal)
+             WaitinAmount = dict.GetString(forKey: "cost")
+            }
+            
+         }else{
+            if(searchActive){
+                        let dict:NSMutableDictionary = self.arrFiltered.getNSMutableDictionary(atIndex: indexPath.row)
+                              
+                               WaitinAmount = dict.GetString(forKey: "cost")
+                             btnSite.setTitle(dict.GetString(forKey: "site"), for: .normal)
                              btnRate.setTitle(dict.GetString(forKey: "amount"), for: .normal)
                              btnCity.setTitle(dict.GetString(forKey: "city"), for: .normal)
                              btnCity.setTitleColor(.black, for: .normal)
                              btnRate.setTitleColor(.black, for: .normal)
                              btnSite.setTitleColor(.black, for: .normal)
-        }else{
-                btnSite.setTitle(dict.GetString(forKey: "site"), for: .normal)
-                  btnRate.setTitle(dict.GetString(forKey: "amount"), for: .normal)
-                  btnCity.setTitle(dict.GetString(forKey: "city"), for: .normal)
-                  btnCity.setTitleColor(.black, for: .normal)
-                  btnRate.setTitleColor(.black, for: .normal)
-                  btnSite.setTitleColor(.black, for: .normal)
+                   }else{
+                 let dict:NSMutableDictionary = self.siteArray.getNSMutableDictionary(atIndex: indexPath.row)
+                           btnSite.setTitle(dict.GetString(forKey: "site"), for: .normal)
+                                                        btnRate.setTitle(dict.GetString(forKey: "amount"), for: .normal)
+                                                        btnCity.setTitle(dict.GetString(forKey: "city"), for: .normal)
+                                                        btnCity.setTitleColor(.black, for: .normal)
+                                                        btnRate.setTitleColor(.black, for: .normal)
+                                                        btnSite.setTitleColor(.black, for: .normal)
+                          
+                       }
         }
-       
+        tableView.reloadData()
         viewShowCity.isHidden = true
         btnViewHide.isHidden = true
         
         
        
     }
+}
+extension UIViewController {
+  func showAlert(title: String, message: String) {
+    let alertController = UIAlertController(title: title, message:
+      message, preferredStyle: .alert)
+    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: {action in
+    }))
+    self.present(alertController, animated: true, completion: nil)
+  }
 }
