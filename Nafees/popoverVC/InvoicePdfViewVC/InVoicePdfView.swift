@@ -14,6 +14,7 @@ class InVoicePdfView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let url: URL! = URL(string: pdfViewdata)
+        print("urrrr",url ?? "")
         webView.load(URLRequest(url: url))
         // Do any additional setup after loading the view.
     }

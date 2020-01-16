@@ -32,7 +32,7 @@ class DailyReportVC: UIViewController,UITextFieldDelegate,UISearchBarDelegate{
     var longitude  = String()
     var location  = String()
     var zipcode  = String()
-    
+    var img = UIImage()
     var toolBar = UIToolbar()
     var datePicker  = UIDatePicker()
     var imagePicker: ImagePicker!
@@ -506,12 +506,12 @@ override func viewWillAppear(_ animated: Bool) {
     
          if HelperClass.isInternetAvailable {
              SwiftLoader.show(animated: true)
-            // var param = [String:Any]()
+             var param = [String:Any]()
              strUrl = WebServicesLink.getReportEntryData
             
              print("strUrl >>>>>>>>>>\(strUrl)")
-             
-             WebService.createRequestAndGetResponse(strUrl, methodType: .GET, andHeaderDict:[:], andParameterDict:nil, onCompletion: { (dictResponse,error,reply,statusCode) in
+             param = ["appid":"com.starwebindia.nafees"]
+             WebService.createRequestAndGetResponse(strUrl, methodType: .POST, andHeaderDict:[:], andParameterDict:param, onCompletion: { (dictResponse,error,reply,statusCode) in
                  SwiftLoader.hide()
                  print("dictResponse >>>\(String(describing: dictResponse))")
                  print("error >>>\(String(describing: error))")
@@ -587,7 +587,7 @@ override func viewWillAppear(_ animated: Bool) {
              var param = [String:Any]()
              strUrl = WebServicesLink.saveDailyReport
             
-            param = ["userid":userId,"driver_id":driverId,"report_date":btnCalender.currentTitle!,"truck_no":btnTruck.currentTitle!,"order_no":txtOrderNumber.text ?? "","city":btnCity.currentTitle!,"site":btnSite.currentTitle!,"site_amount":btnRate.currentTitle!,"waiting_reason":btnWaitingTImeR.currentTitle!,"waiting_time":btnTime.currentTitle!,"waiting_time_amount":WaitinAmount,"latitude":latitude,"longitude":longitude,"location":location,"pincode":zipcode]
+            param = ["appid":"com.starwebindia.nafees","userid":userId,"driver_id":driverId,"report_date":btnCalender.currentTitle!,"truck_no":btnTruck.currentTitle!,"order_no":txtOrderNumber.text ?? "","city":btnCity.currentTitle!,"site":btnSite.currentTitle!,"site_amount":btnRate.currentTitle!,"waiting_reason":btnWaitingTImeR.currentTitle!,"waiting_time":btnTime.currentTitle!,"waiting_time_amount":WaitinAmount,"latitude":latitude,"longitude":longitude,"location":location,"pincode":zipcode,"filename":img]
            
              print("strUrl >>>>>>>>>>\(strUrl)")
             print("Param >>>>>>>>>>",param)
@@ -645,6 +645,7 @@ override func viewWillAppear(_ animated: Bool) {
 extension DailyReportVC: ImagePickerDelegate {
 
     func didSelect(image: UIImage?) {
+        img = image!
         self.imge.image = image
         btnpickImage.setTitle("Change Image", for: .normal)
         imgHieghtConst.constant = 200

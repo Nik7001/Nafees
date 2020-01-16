@@ -46,7 +46,7 @@ class InvoiceVC: UIViewController {
              SwiftLoader.show(animated: true)
              var param = [String:Any]()
              strUrl = WebServicesLink.getInvoice
-            param = ["userid":userId]
+            param = ["appid":"com.starwebindia.nafees","userid":userId]
              print("strUrl >>>>>>>>>>\(strUrl)")
              WebService.createRequestAndGetResponse(strUrl, methodType: .POST, andHeaderDict:[:], andParameterDict:param, onCompletion: { (dictResponse,error,reply,statusCode) in
                  SwiftLoader.hide()

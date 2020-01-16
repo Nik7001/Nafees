@@ -26,8 +26,11 @@ class ViewController: UIViewController {
         viewPassword.setCornerRadiousAndBorder(.systemBlue, borderWidth: 0.5, cornerRadius: viewPassword.frame.size.height/2)
         
         btnLogin.setCornerRadiousAndBorder(.clear, borderWidth: 0.5, cornerRadius: btnLogin.frame.size.height/2)
-        txtUserName.text = "test@gmail.com"
-        txtPassword.text = "test"
+        //txtUserName.text = "test@gmail.com"
+        //txtPassword.text = "test"
+        
+        txtUserName.text = "fmklcc@hotmail.com"
+         txtPassword.text = "Nafees@421"
         // Do any additional setup after loading the view.
     }
     
@@ -72,7 +75,7 @@ class ViewController: UIViewController {
                 var param = [String:Any]()
                 strUrl = WebServicesLink.login
                 
-                param = ["userid":txtUserName.text!,"password":txtPassword.text!,"appid":UIDevice.current.identifierForVendor?.uuidString ?? ""]
+                param = ["userid":txtUserName.text!,"password":txtPassword.text!,"appid":"com.starwebindia.nafees"]
                 
                 
                 print("param >>>>>>>>>>\(param)")
