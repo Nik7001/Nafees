@@ -108,6 +108,7 @@ override func viewWillAppear(_ animated: Bool) {
                   btnSite.setTitle("Site", for:.normal)
         self.searchBar.resignFirstResponder()
          searchActive = false
+        searchBar.text = ""
     }
     
     @IBAction func btnOk(_ sender: Any) {
@@ -121,6 +122,7 @@ override func viewWillAppear(_ animated: Bool) {
                   btnRate.setTitle("Rate", for:.normal)
                   btnSite.setTitle("Site", for:.normal)
          searchActive = false
+        searchBar.text = ""
     }
     
     @IBAction func btnHide(_ sender: Any) {
@@ -128,6 +130,7 @@ override func viewWillAppear(_ animated: Bool) {
         btnViewHide.isHidden = true
         self.searchBar.resignFirstResponder()
          searchActive = false
+        searchBar.text = ""
     }
     
     
@@ -744,7 +747,7 @@ extension DailyReportVC : UITableViewDelegate,UITableViewDataSource{
         viewShowCity.isHidden = true
         btnViewHide.isHidden = true
          searchActive = false
-        
+        searchBar.text = ""
        
     }
 }
