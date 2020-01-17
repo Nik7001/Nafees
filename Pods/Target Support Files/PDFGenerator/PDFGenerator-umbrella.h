@@ -10,7 +10,8 @@
 #endif
 #endif
 
+#import "PDFGenerator.h"
 
-FOUNDATION_EXPORT double Pods_NafeesTestsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_NafeesTestsVersionString[];
+FOUNDATION_EXPORT double PDFGeneratorVersionNumber;
+FOUNDATION_EXPORT const unsigned char PDFGeneratorVersionString[];
 
