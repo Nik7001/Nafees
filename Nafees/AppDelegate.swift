@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var deviceTokenString: String?
     
      var reachability:Reachability?
-
+     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.shared.enable = true
         UINavigationBar.appearance().tintColor = UIColor.white
