@@ -31,6 +31,14 @@ class WeeklyReportVC: UIViewController {
         UIApplication.shared.windows.first?.rootViewController = slideMenuController
         UIApplication.shared.windows.first?.makeKeyAndVisible()
     }
+    
+    
+    @IBAction func btnPrinter(_ sender: Any) {
+    }
+    
+    @IBAction func btnPdf(_ sender: Any) {
+    }
+    
     /*
     // MARK: - Navigation
 

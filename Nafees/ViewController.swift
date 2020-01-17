@@ -13,12 +13,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var viewUser: UIView!
     @IBOutlet weak var txtUserName: UITextField!
     
-    @IBOutlet weak var btnLogin: GradientButton!
+   
+    @IBOutlet weak var viewBack: Gradientview!
     
+    @IBOutlet weak var btnLogin: GradientButton!
     @IBOutlet weak var viewPassword: UIView!
      var strUrl = String()
     
-    @IBOutlet weak var viewBack: UIView!
+     
     override func viewDidLoad() {
         super.viewDidLoad()
         
