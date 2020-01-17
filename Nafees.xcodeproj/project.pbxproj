@@ -26,8 +26,6 @@
 		1858A91A23CADDD600F1D6C5 /* Nafees.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1858A91823CADDD600F1D6C5 /* Nafees.xcdatamodeld */; };
 		1858A91C23CADDD800F1D6C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1858A91B23CADDD800F1D6C5 /* Assets.xcassets */; };
 		1858A91F23CADDD800F1D6C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1858A91D23CADDD800F1D6C5 /* LaunchScreen.storyboard */; };
-		1858A92A23CADDD800F1D6C5 /* NafeesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858A92923CADDD800F1D6C5 /* NafeesTests.swift */; };
-		1858A93523CADDD800F1D6C5 /* NafeesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858A93423CADDD800F1D6C5 /* NafeesUITests.swift */; };
 		1866FD2623CB602700507458 /* WebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1866FD2523CB602700507458 /* WebService.m */; };
 		1866FD4C23CB606100507458 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = 1866FD2B23CB606000507458 /* UIImage+WebP.m */; };
 		1866FD4D23CB606100507458 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1866FD2C23CB606000507458 /* MKAnnotationView+WebCache.m */; };
@@ -74,27 +72,8 @@
 		187AB4A123CC695900A8B095 /* DailyReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187AB4A023CC695900A8B095 /* DailyReportVC.swift */; };
 		187AB4A423CC7B4800A8B095 /* WeeklyReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187AB4A323CC7B4800A8B095 /* WeeklyReportVC.swift */; };
 		187AB4A723CC7B7800A8B095 /* InvoiceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187AB4A623CC7B7800A8B095 /* InvoiceVC.swift */; };
-		BAE85EA3F7DBF09EC9918544 /* Pods_Nafees_NafeesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75BDE1D8130A3476C20E224A /* Pods_Nafees_NafeesUITests.framework */; };
-		E39FA2545A8452871CABB3D0 /* Pods_NafeesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1952D6CD6EA99F28618A6B95 /* Pods_NafeesTests.framework */; };
 		F4EC270BE9E2F93FE727D44B /* Pods_Nafees.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C8DE637050CC7C301270E1A /* Pods_Nafees.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		1858A92623CADDD800F1D6C5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1858A90423CADDD600F1D6C5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1858A90B23CADDD600F1D6C5;
-			remoteInfo = Nafees;
-		};
-		1858A93123CADDD800F1D6C5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1858A90423CADDD600F1D6C5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1858A90B23CADDD600F1D6C5;
-			remoteInfo = Nafees;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1817327023CE121100B33D80 /* YBTextPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBTextPickerCell.xib; sourceTree = "<group>"; };
@@ -118,12 +97,6 @@
 		1858A91B23CADDD800F1D6C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1858A91E23CADDD800F1D6C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1858A92023CADDD800F1D6C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1858A92523CADDD800F1D6C5 /* NafeesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NafeesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1858A92923CADDD800F1D6C5 /* NafeesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NafeesTests.swift; sourceTree = "<group>"; };
-		1858A92B23CADDD800F1D6C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1858A93023CADDD800F1D6C5 /* NafeesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NafeesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1858A93423CADDD800F1D6C5 /* NafeesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NafeesUITests.swift; sourceTree = "<group>"; };
-		1858A93623CADDD800F1D6C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1866FD2323CB602700507458 /* Nafees-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Nafees-Bridging-Header.h"; sourceTree = "<group>"; };
 		1866FD2423CB602700507458 /* WebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebService.h; sourceTree = "<group>"; };
 		1866FD2523CB602700507458 /* WebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebService.m; sourceTree = "<group>"; };
@@ -212,22 +185,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1858A92223CADDD800F1D6C5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E39FA2545A8452871CABB3D0 /* Pods_NafeesTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1858A92D23CADDD800F1D6C5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BAE85EA3F7DBF09EC9918544 /* Pods_Nafees_NafeesUITests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -282,8 +239,6 @@
 			isa = PBXGroup;
 			children = (
 				1858A90E23CADDD600F1D6C5 /* Nafees */,
-				1858A92823CADDD800F1D6C5 /* NafeesTests */,
-				1858A93323CADDD800F1D6C5 /* NafeesUITests */,
 				1858A90D23CADDD600F1D6C5 /* Products */,
 				F72E32F457941AE06BFA44DA /* Pods */,
 				8BF35713AF76CA7BBFAE6C85 /* Frameworks */,
@@ -294,8 +249,6 @@
 			isa = PBXGroup;
 			children = (
 				1858A90C23CADDD600F1D6C5 /* Nafees.app */,
-				1858A92523CADDD800F1D6C5 /* NafeesTests.xctest */,
-				1858A93023CADDD800F1D6C5 /* NafeesUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -320,24 +273,6 @@
 				1858A91823CADDD600F1D6C5 /* Nafees.xcdatamodeld */,
 			);
 			path = Nafees;
-			sourceTree = "<group>";
-		};
-		1858A92823CADDD800F1D6C5 /* NafeesTests */ = {
-			isa = PBXGroup;
-			children = (
-				1858A92923CADDD800F1D6C5 /* NafeesTests.swift */,
-				1858A92B23CADDD800F1D6C5 /* Info.plist */,
-			);
-			path = NafeesTests;
-			sourceTree = "<group>";
-		};
-		1858A93323CADDD800F1D6C5 /* NafeesUITests */ = {
-			isa = PBXGroup;
-			children = (
-				1858A93423CADDD800F1D6C5 /* NafeesUITests.swift */,
-				1858A93623CADDD800F1D6C5 /* Info.plist */,
-			);
-			path = NafeesUITests;
 			sourceTree = "<group>";
 		};
 		1866FD2223CB5FFD00507458 /* SupportedClasses */ = {
@@ -578,45 +513,6 @@
 			productReference = 1858A90C23CADDD600F1D6C5 /* Nafees.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1858A92423CADDD800F1D6C5 /* NafeesTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1858A93C23CADDD800F1D6C5 /* Build configuration list for PBXNativeTarget "NafeesTests" */;
-			buildPhases = (
-				670FC4E8C23247BE04EC4431 /* [CP] Check Pods Manifest.lock */,
-				1858A92123CADDD800F1D6C5 /* Sources */,
-				1858A92223CADDD800F1D6C5 /* Frameworks */,
-				1858A92323CADDD800F1D6C5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1858A92723CADDD800F1D6C5 /* PBXTargetDependency */,
-			);
-			name = NafeesTests;
-			productName = NafeesTests;
-			productReference = 1858A92523CADDD800F1D6C5 /* NafeesTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		1858A92F23CADDD800F1D6C5 /* NafeesUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1858A93F23CADDD800F1D6C5 /* Build configuration list for PBXNativeTarget "NafeesUITests" */;
-			buildPhases = (
-				FC9CC1D7B2C08F8BE6B0E037 /* [CP] Check Pods Manifest.lock */,
-				1858A92C23CADDD800F1D6C5 /* Sources */,
-				1858A92D23CADDD800F1D6C5 /* Frameworks */,
-				1858A92E23CADDD800F1D6C5 /* Resources */,
-				1C04B339B844D33835F51FE6 /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1858A93223CADDD800F1D6C5 /* PBXTargetDependency */,
-			);
-			name = NafeesUITests;
-			productName = NafeesUITests;
-			productReference = 1858A93023CADDD800F1D6C5 /* NafeesUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -630,14 +526,6 @@
 					1858A90B23CADDD600F1D6C5 = {
 						CreatedOnToolsVersion = 11.2.1;
 						LastSwiftMigration = 1120;
-					};
-					1858A92423CADDD800F1D6C5 = {
-						CreatedOnToolsVersion = 11.2.1;
-						TestTargetID = 1858A90B23CADDD600F1D6C5;
-					};
-					1858A92F23CADDD800F1D6C5 = {
-						CreatedOnToolsVersion = 11.2.1;
-						TestTargetID = 1858A90B23CADDD600F1D6C5;
 					};
 				};
 			};
@@ -655,8 +543,6 @@
 			projectRoot = "";
 			targets = (
 				1858A90B23CADDD600F1D6C5 /* Nafees */,
-				1858A92423CADDD800F1D6C5 /* NafeesTests */,
-				1858A92F23CADDD800F1D6C5 /* NafeesUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -677,62 +563,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1858A92323CADDD800F1D6C5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1858A92E23CADDD800F1D6C5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1C04B339B844D33835F51FE6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Nafees-NafeesUITests/Pods-Nafees-NafeesUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Nafees-NafeesUITests/Pods-Nafees-NafeesUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Nafees-NafeesUITests/Pods-Nafees-NafeesUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		670FC4E8C23247BE04EC4431 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-NafeesTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		AE723A18EAFA30328CDA8883 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -766,28 +599,6 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Nafees-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FC9CC1D7B2C08F8BE6B0E037 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Nafees-NafeesUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -860,36 +671,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1858A92123CADDD800F1D6C5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1858A92A23CADDD800F1D6C5 /* NafeesTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1858A92C23CADDD800F1D6C5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1858A93523CADDD800F1D6C5 /* NafeesUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		1858A92723CADDD800F1D6C5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1858A90B23CADDD600F1D6C5 /* Nafees */;
-			targetProxy = 1858A92623CADDD800F1D6C5 /* PBXContainerItemProxy */;
-		};
-		1858A93223CADDD800F1D6C5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1858A90B23CADDD600F1D6C5 /* Nafees */;
-			targetProxy = 1858A93123CADDD800F1D6C5 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		1858A91523CADDD600F1D6C5 /* Main.storyboard */ = {
@@ -1032,17 +814,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = F2GFYMBWAQ;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = F9SF6YR5KZ;
 				INFOPLIST_FILE = Nafees/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nafees;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jsm.test.Bhoj;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Nafees_Dev;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Nafees/SupportedClasses/Nafees-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1057,116 +839,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = F2GFYMBWAQ;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = F9SF6YR5KZ;
 				INFOPLIST_FILE = Nafees/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nafees;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jsm.test.Bhoj;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Nafees_Dev;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Nafees/SupportedClasses/Nafees-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
-		1858A93D23CADDD800F1D6C5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F16725784ABFE62A91445A20 /* Pods-NafeesTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F2GFYMBWAQ;
-				INFOPLIST_FILE = NafeesTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.NafeesTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nafees.app/Nafees";
-			};
-			name = Debug;
-		};
-		1858A93E23CADDD800F1D6C5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6AC30357AE85C6E1D3658A0A /* Pods-NafeesTests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F2GFYMBWAQ;
-				INFOPLIST_FILE = NafeesTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.NafeesTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nafees.app/Nafees";
-			};
-			name = Release;
-		};
-		1858A94023CADDD800F1D6C5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E6CCE0459168716D40BBF08B /* Pods-Nafees-NafeesUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F2GFYMBWAQ;
-				INFOPLIST_FILE = NafeesUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.NafeesUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Nafees;
-			};
-			name = Debug;
-		};
-		1858A94123CADDD800F1D6C5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DE348BE715FD2A8BBD4E219F /* Pods-Nafees-NafeesUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F2GFYMBWAQ;
-				INFOPLIST_FILE = NafeesUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.NafeesUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Nafees;
 			};
 			name = Release;
 		};
@@ -1187,24 +873,6 @@
 			buildConfigurations = (
 				1858A93A23CADDD800F1D6C5 /* Debug */,
 				1858A93B23CADDD800F1D6C5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1858A93C23CADDD800F1D6C5 /* Build configuration list for PBXNativeTarget "NafeesTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1858A93D23CADDD800F1D6C5 /* Debug */,
-				1858A93E23CADDD800F1D6C5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1858A93F23CADDD800F1D6C5 /* Build configuration list for PBXNativeTarget "NafeesUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1858A94023CADDD800F1D6C5 /* Debug */,
-				1858A94123CADDD800F1D6C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
