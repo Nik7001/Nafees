@@ -7,9 +7,11 @@
 //
 
 import UIKit
-
+import PDFKit
+import PDFGenerator
 class WeeklyReportVC: UIViewController {
-
+     fileprivate var outputAsData: Bool = false
+    @IBOutlet var viewMain: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,10 +36,48 @@ class WeeklyReportVC: UIViewController {
     
     
     @IBAction func btnPrinter(_ sender: Any) {
+      
     }
     
     @IBAction func btnPdf(_ sender: Any) {
+        generatePDF()
     }
+    
+   func generatePDF() {
+     
+      do {
+        
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+
+        let fileURL:URL = documentsURL.appendingPathComponent("note.pdf")
+
+        do {
+            try FileManager.default.createDirectory(atPath: fileURL.path, withIntermediateDirectories: true, attributes: nil)
+        } catch let error as NSError {
+            NSLog("Unable to create directory \(error.debugDescription)")
+        }
+
+        UIGraphicsBeginPDFContextToFile(fileURL.appendingPathComponent("note.pdf").path, CGRect.zero, nil);
+            if outputAsData {
+            let data = try PDFGenerator.generated(by: [viewMain])
+            try data.write(to: URL(fileURLWithPath: fileURL))
+                 } else {
+                     try PDFGenerator.generate([viewMain], to: fileURL)
+                 }
+                 openPDFViewer(fileURL)
+             } catch let e {
+                 print(e)
+             }
+    
+   }
+       fileprivate func openPDFViewer(_ pdfPath: String) {
+           print("pdfPath",pdfPath)
+          let vc = self.storyboard?.instantiateViewController(withIdentifier: "InVoicePdfView") as! InVoicePdfView
+               vc.pdfViewdata = pdfPath
+           self.navigationController?.pushViewController(vc, animated: true)
+           
+       }
+    
     
     /*
     // MARK: - Navigation
@@ -50,3 +90,4 @@ class WeeklyReportVC: UIViewController {
     */
 
 }
+

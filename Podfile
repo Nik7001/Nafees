@@ -8,16 +8,8 @@ target 'Nafees' do
   # Pods for Nafees
     pod 'IQKeyboardManagerSwift'
     pod 'Alamofire'
-   
+    pod 'PDFGenerator'
 
     
-  target 'NafeesTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-  target 'NafeesUITests' do
-    # Pods for testing
-  end
-
+ 
 end

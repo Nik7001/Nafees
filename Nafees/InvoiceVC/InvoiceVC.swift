@@ -107,7 +107,7 @@ extension InvoiceVC : UITableViewDelegate,UITableViewDataSource,UIDocumentIntera
         print("pathhhh",newUrl)
        
        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "InVoicePdfView") as? InVoicePdfView
-       vc?.pdfViewdata = newUrl
+       vc?.pdfURl = newUrl
       self.navigationController?.pushViewController(vc!, animated: true)
        
     }
@@ -120,3 +120,5 @@ class InvoiceCell: UITableViewCell {
     @IBOutlet weak var btnInvoice: UIButton!
     @IBOutlet weak var lblInvoiceName: UILabel!
 }
+
+

@@ -8,14 +8,25 @@
 
 import UIKit
 import WebKit
+import PDFKit
 class InVoicePdfView: UIViewController {
- var pdfViewdata = String()
+    var pdfViewdata = String()
+    var pdfURl = String()
+    
     @IBOutlet weak var webView: WKWebView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let url: URL! = URL(string: pdfViewdata)
-        print("urrrr",url ?? "")
-        webView.load(URLRequest(url: url))
+        if pdfViewdata == ""{
+         let url: URL! = URL(string: pdfURl)
+         print("urrrr",url ?? "")
+         webView.load(URLRequest(url: url))
+        }else{
+            if let pdf = Bundle.main.url(forResource: pdfViewdata, withExtension: "pdf", subdirectory: nil, localization: nil)  {
+            let req = NSURLRequest(url: pdf)
+            webView.load(req as URLRequest)
+            }
+            
+        }
         // Do any additional setup after loading the view.
     }
  override func viewWillAppear(_ animated: Bool) {

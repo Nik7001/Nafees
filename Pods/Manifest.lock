@@ -1,20 +1,24 @@
 PODS:
   - Alamofire (4.9.0)
   - IQKeyboardManagerSwift (6.5.1)
+  - PDFGenerator (3.1.0)
 
 DEPENDENCIES:
   - Alamofire
   - IQKeyboardManagerSwift
+  - PDFGenerator
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - IQKeyboardManagerSwift
+    - PDFGenerator
 
 SPEC CHECKSUMS:
   Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
   IQKeyboardManagerSwift: 9ac7524fad9f9fe9a3b98c927e7772471ca546d2
+  PDFGenerator: 17d6bc525db0a3fcd156fbf00f9d1b8d5cc75d1e
 
-PODFILE CHECKSUM: b89ae9d62f5697f2ef407be76c702058e4e7c0f2
+PODFILE CHECKSUM: 53abafeee418f938408e9ebe8147beba7d55b569
 
 COCOAPODS: 1.8.3

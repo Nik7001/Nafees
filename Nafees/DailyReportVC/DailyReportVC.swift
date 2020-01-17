@@ -330,13 +330,6 @@ override func viewWillAppear(_ animated: Bool) {
         else if btnTruck.currentTitle == "Truck No."{
          showAlert(title: "Alert", message: "Select Truck No.")
         }
-        else if btnWaitingTImeR.currentTitle == "Waiting Time Reason"{
-        showAlert(title: "Alert", message: "Select Waiting Time Reason")
-                                 
-            }
-        else if btnTime.currentTitle == "Waiting Time"{
-                 showAlert(title: "Alert", message: "Select Waiting Time ")
-        }
         else if txtOrderNumber.text == ""{
               showAlert(title: "Alert", message: "Select OrderNo.")
        }
@@ -723,9 +716,7 @@ extension DailyReportVC : UITableViewDelegate,UITableViewDataSource{
             
          }else{
             if(searchActive){
-                        let dict:NSMutableDictionary = self.arrFiltered.getNSMutableDictionary(atIndex: indexPath.row)
-                              
-                               WaitinAmount = dict.GetString(forKey: "cost")
+                        let dict:NSMutableDictionary = self.arrSiteFiltered.getNSMutableDictionary(atIndex: indexPath.row)
                              btnSite.setTitle(dict.GetString(forKey: "site"), for: .normal)
                              btnRate.setTitle(dict.GetString(forKey: "amount"), for: .normal)
                              btnCity.setTitle(dict.GetString(forKey: "city"), for: .normal)
@@ -734,7 +725,7 @@ extension DailyReportVC : UITableViewDelegate,UITableViewDataSource{
                              btnSite.setTitleColor(.black, for: .normal)
                    }else{
                  let dict:NSMutableDictionary = self.siteArray.getNSMutableDictionary(atIndex: indexPath.row)
-                           btnSite.setTitle(dict.GetString(forKey: "site"), for: .normal)
+                                                        btnSite.setTitle(dict.GetString(forKey: "site"), for: .normal)
                                                         btnRate.setTitle(dict.GetString(forKey: "amount"), for: .normal)
                                                         btnCity.setTitle(dict.GetString(forKey: "city"), for: .normal)
                                                         btnCity.setTitleColor(.black, for: .normal)
