@@ -63,12 +63,23 @@ class WebServicesLink: NSObject {
             return (baseUrl + "getInvoice")
         }
     }
-  
+    class var getReports: String {
+        get {
+            return (baseUrl + "getReports")
+        }
+    }
+    class var getReportDetail: String {
+        get {
+            return (baseUrl + "getReportDetail")
+        }
+    }
+    
     class var log_out: String {
         get {
             return (baseUrl + "customer/customer/api_logout?")
         }
     }
+    
    
     
 }

@@ -71,47 +71,143 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "8AC366B8-6530-4AD7-B24D-82B0CB431C8F"
+            uuid = "9399988B-1B1F-4DB0-8040-3A30109CE299"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nafees/WeeklyReportVC/WeeklyReportVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "openPDFViewer(_:)"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
+            landmarkName = "generatePDF()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "12EDF858-8A5E-45D3-85F5-B5E8770713D7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nafees/popoverVC/InvoicePdfViewVC/InVoicePdfView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3502304E-1424-4556-8661-B3B00668DD38"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nafees/popoverVC/InvoicePdfViewVC/InVoicePdfView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "89A558A0-044D-47DC-8A20-3D8FBF3FCFE2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nafees/popoverVC/InvoicePdfViewVC/InVoicePdfView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F85E99D6-6DB6-4CB6-B3C4-7698484564B3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nafees/popoverVC/InvoicePdfViewVC/InVoicePdfView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "298C63BF-D9C8-4B8A-A753-3DC9DF3FE144"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nafees/WeeklyReportVC/WeeklyReportVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "377"
+            endingLineNumber = "377"
+            landmarkName = "WS_GetReports()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E9EBC31F-C627-444F-85C4-57E298B31D80"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nafees/ReportDetailVC/ReportDetailVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "WS_GetReports()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "8AC366B8-6530-4AD7-B24D-82B0CB431C8F - 97d64825b3ea19c5"
+                  uuid = "E9EBC31F-C627-444F-85C4-57E298B31D80 - 235e3a28ccbfd9d9"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Nafees.WeeklyReportVC.(openPDFViewer in _EEB67357E86CB07CF58EEE07588EA912)(Swift.String) -&gt; ()"
+                  symbolName = "Nafees.ReportDetailVC.WS_GetReports() -&gt; ()"
                   moduleName = "Nafees"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Documents/nafee/Nafees/WeeklyReportVC/WeeklyReportVC.swift"
+                  urlString = "file:///Users/apple/Desktop/Nafee/Nafees/ReportDetailVC/ReportDetailVC.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "67"
-                  endingLineNumber = "67"
-                  offsetFromSymbolStart = "336">
+                  startingLineNumber = "145"
+                  endingLineNumber = "145"
+                  offsetFromSymbolStart = "1216">
                </Location>
                <Location
-                  uuid = "8AC366B8-6530-4AD7-B24D-82B0CB431C8F - 97d64825b3ea19c5"
+                  uuid = "E9EBC31F-C627-444F-85C4-57E298B31D80 - a841b0a0d1b13254"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Nafees.WeeklyReportVC.(openPDFViewer in _EEB67357E86CB07CF58EEE07588EA912)(Swift.String) -&gt; ()"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;, Swift.Optional&lt;Swift.String&gt;, Swift.UInt) -&gt; () in Nafees.ReportDetailVC.WS_GetReports() -&gt; ()"
                   moduleName = "Nafees"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Documents/nafee/Nafees/WeeklyReportVC/WeeklyReportVC.swift"
+                  urlString = "file:///Users/apple/Desktop/Nafee/Nafees/ReportDetailVC/ReportDetailVC.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "67"
-                  endingLineNumber = "67"
-                  offsetFromSymbolStart = "900">
+                  startingLineNumber = "146"
+                  endingLineNumber = "146"
+                  offsetFromSymbolStart = "252">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -119,48 +215,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5649B27A-6091-4E40-B4CC-299FA939D2EB"
+            uuid = "D59E0B93-686A-47ED-AE3D-0569754DD1E6"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Nafees/WeeklyReportVC/WeeklyReportVC.swift"
+            filePath = "Nafees/ReportDetailVC/ReportDetailVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "generatePDF()"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
+            landmarkName = "WS_GetReports()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6640BD7A-C3C0-4087-8235-7EA271BCC502"
+            uuid = "3C4572C2-F3BD-495B-BEE1-552E1FF38655"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Nafees/WeeklyReportVC/WeeklyReportVC.swift"
+            filePath = "Nafees/ReportDetailVC/ReportDetailVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "generatePDF()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "093826CA-BD40-429C-880E-DD323505EC09"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Nafees/WeeklyReportVC/WeeklyReportVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "generatePDF()"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "WS_GetReports()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

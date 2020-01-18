@@ -8,11 +8,10 @@
 
 import UIKit
 
-class InvoiceVC: UIViewController {
+class InvoiceVC: UIViewController,UIDocumentInteractionControllerDelegate {
      var InvoiceArray = NSMutableArray()
      var strUrl = String()
-     var docController: UIDocumentInteractionController!
-    
+     
     @IBOutlet weak var tblView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +20,7 @@ class InvoiceVC: UIViewController {
         WS_GetInvoice()
         // Do any additional setup after loading the view.
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     self.navigationController?.navigationBar.isHidden = true
@@ -81,7 +81,7 @@ class InvoiceVC: UIViewController {
 
 }
 
-extension InvoiceVC : UITableViewDelegate,UITableViewDataSource,UIDocumentInteractionControllerDelegate{
+extension InvoiceVC : UITableViewDelegate,UITableViewDataSource{
      func numberOfSectionsInTableView(tableView: UITableView) -> Int {
           return 1
       }
@@ -108,12 +108,8 @@ extension InvoiceVC : UITableViewDelegate,UITableViewDataSource,UIDocumentIntera
        
        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "InVoicePdfView") as? InVoicePdfView
        vc?.pdfURl = newUrl
-      self.navigationController?.pushViewController(vc!, animated: true)
-       
+        self.navigationController?.pushViewController(vc!, animated: true)
     }
-    
-    
-    
 }
 class InvoiceCell: UITableViewCell {
     
