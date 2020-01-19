@@ -56,8 +56,9 @@ class ReportDetailVC: UIViewController,UIDocumentInteractionControllerDelegate {
          viewTruck.setCornerRadiousAndBorder(.lightGray, borderWidth: 0.8, cornerRadius:4)
         
           viewGrossTotal.setCornerRadiousAndBorder(.lightGray, borderWidth: 0.8, cornerRadius:4)
-        
-        
+              let userdict = AppUserDefault.getUserDetails()
+                  let drivername = userdict.GetString(forKey: "name")
+             lblDriver.text = drivername
         
         // Do any additional setup after loading the view.
     }
@@ -169,7 +170,7 @@ class ReportDetailVC: UIViewController,UIDocumentInteractionControllerDelegate {
                         self.lblWaitingReason.text = dict.GetString(forKey: "waiting_reason")
                         self.waitingAmout = Double(dict.GetString(forKey: "waiting_time_amount")) ?? 0
                         self.grossAmout += Double(dict.GetString(forKey: "site_amount")) ?? 0
-                        self.lblDriver.text = "TEST"
+                //self.lblDriver.text = "TEST"
                     }
                     var sum = 0.0
                     sum +=  self.grossAmout + Double(self.waitingAmout)

@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import Alamofire
 class DailyReportVC: UIViewController,UITextFieldDelegate,UISearchBarDelegate{
 
     @IBOutlet weak var tblView: UITableView!
@@ -27,6 +28,7 @@ class DailyReportVC: UIViewController,UITextFieldDelegate,UISearchBarDelegate{
     @IBOutlet weak var btnSite: UIButton!
     @IBOutlet weak var btnTruck: UIButton!
     @IBOutlet weak var btnCalender: UIButton!
+    
     let locationManager = LocationManager()
     var latitude  = String()
     var longitude  = String()
@@ -56,7 +58,7 @@ class DailyReportVC: UIViewController,UITextFieldDelegate,UISearchBarDelegate{
        setCornerRadious()
         imgHieghtConst.constant = 0
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd-MM-yyyy"
+        formatter.dateFormat = "yyyy-MM-dd"
         btnCalender.setTitle(formatter.string(from: Date()), for: .normal)
          self.imagePicker = ImagePicker(presentationController: self, delegate: self)
         WS_GetReport()
@@ -378,7 +380,7 @@ override func viewWillAppear(_ animated: Bool) {
 
     @objc func onDoneButtonClick() {
         let formatter = DateFormatter()
-             formatter.dateFormat = "dd-MM-yyyy"
+             formatter.dateFormat = "yyyy-MM-dd"
               btnCalender.setTitle(formatter.string(from: datePicker.date), for: .normal)
         btnCalender.setTitleColor(.black, for: .normal)
         toolBar.removeFromSuperview()
@@ -389,7 +391,7 @@ override func viewWillAppear(_ animated: Bool) {
         toolBar.removeFromSuperview()
         datePicker.removeFromSuperview()
         let formatter = DateFormatter()
-            formatter.dateFormat = "dd-MM-yyyy"
+            formatter.dateFormat = "yyyy-MM-dd"
          btnCalender.setTitle(formatter.string(from:Date()), for: .normal)
        self.view.endEditing(true)
      }
@@ -574,7 +576,99 @@ override func viewWillAppear(_ animated: Bool) {
          }
      }
     
-  func WS_SaveDailyReport(){
+    func WS_SaveDailyReport(){
+        if HelperClass.isInternetAvailable {
+            SwiftLoader.show(animated: true)
+            let imageData  = img.jpegData(compressionQuality: 0.5)
+          
+         let userdict = AppUserDefault.getUserDetails()
+                     let driverId = userdict.GetString(forKey: "driver_id")
+                      let userId = userdict.GetInt(forKey: "id")
+                    
+                      var param = [String:Any]()
+                          
+            let strUrl = WebServicesLink.saveDailyReport
+            
+              param = ["appid":"com.starwebindia.nafees","userid":userId,"driver_id":driverId,"report_date":btnCalender.currentTitle!,"truck_no":btnTruck.currentTitle!,"order_no":txtOrderNumber.text ?? "","city":btnCity.currentTitle!,"site":btnSite.currentTitle!,"site_amount":btnRate.currentTitle!,"waiting_reason":btnWaitingTImeR.currentTitle!,"waiting_time":btnTime.currentTitle!,"waiting_time_amount":WaitinAmount,"latitude":latitude,"longitude":longitude,"location":location,"pincode":zipcode]
+                          
+                print("param >>>>>>>>>>\(param)")
+                           // print("param >>>>>>>>>>\(strUrl)")
+           // param = [WebServiceConstant.email:txtemail.text!,WebServiceConstant.first_name:txtname.text!,WebServiceConstant.last_name:txtlname.text!,WebServiceConstant.birthmonth:txtbirthmonth.text! ,"token":"Arnasoftech","Content-Type":"file"]
+            Alamofire.upload(multipartFormData: { (multipartFormData) in
+                for (key, value) in param {
+                    multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+                }
+                if let data = imageData{
+                    multipartFormData.append(data, withName: "filename", fileName: "image.jpg", mimeType: "image/png")
+                }
+            }, usingThreshold: UInt64.init(), to: strUrl, method: .post, headers:[:]) { (result) in
+                switch result{
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        if let status = response.response?.statusCode {
+                            switch(status){
+                            case 200:
+                                let alert = UIAlertController(title: "Success", message: "SavedReports", preferredStyle: .alert)
+                                self.present(alert, animated: true, completion: nil)
+                                let when = DispatchTime.now() + 5
+                                DispatchQueue.main.asyncAfter(deadline: when){
+                                    // your code with delay
+                                    alert.dismiss(animated: true, completion: nil)
+                                     SwiftLoader.hide()
+                                }
+                                if let result = response.result.value {
+                                    SwiftLoader.hide()
+                                    print("result",result)
+                                    let dict : NSDictionary = result as! NSDictionary
+                                    let Status:Int = dict.GetInt(forKey: "result")
+                                        print("status",Status)
+                                    if "\(Status)" == "1"{
+                                   self.btnWaitingTImeR.setTitle("Waiting Time Reason", for: .normal)
+                                                          self.btnWaitingTImeR.setTitleColor(.lightGray, for: .normal)
+                                                          self.btnCity.setTitle("City", for: .normal)
+                                                          self.btnCity.setTitleColor(.lightGray, for: .normal)
+                                                          self.btnRate.setTitle("Rate", for: .normal)
+                                                          self.btnRate.setTitleColor(.lightGray, for: .normal)
+                                                          self.btnSite.setTitle("Site", for: .normal)
+                                                          self.btnSite.setTitleColor(.lightGray, for: .normal)
+                                                          self.btnTime.setTitle("Site", for: .normal)
+                                                          self.btnTime.setTitleColor(.lightGray, for: .normal)
+                                                          self.txtOrderNumber.text = ""
+                                                          self.txtOrderNumber.placeholder = "Order No."
+                                  
+                                    }
+                                    else{
+                                        let alert = UIAlertController(title: "Failed", message: "Missing Some Information", preferredStyle: .alert)
+                                                self.present(alert, animated: true, completion: nil)
+                                                    let when = DispatchTime.now() + 5
+                                                DispatchQueue.main.asyncAfter(deadline: when){
+                                                                          // your code with delay
+                                        alert.dismiss(animated: true, completion: nil)
+                                        }
+                                        
+                                    }
+                                }
+                            default:
+                                print("error with response status: \(status)")
+                            }
+                        }
+                    }
+                case .failure(let error):
+                    print("Error in upload: \(error.localizedDescription)")
+                   
+                }
+            }
+         
+        }
+        else {
+            PopUpView.addPopUpAlertView(MessageStringFile.whoopsText(), leftBtnTitle:MessageStringFile.okText() , rightBtnTitle:"" , firstLblTitle: MessageStringFile.networkReachability(), secondLblTitle: "")
+            PopUpView.sharedInstance.delegate = nil
+        }
+    }
+    
+    
+    
+ /* func WS_SaveDailyReport(){
     
          if HelperClass.isInternetAvailable {
             
@@ -586,7 +680,7 @@ override func viewWillAppear(_ animated: Bool) {
              var param = [String:Any]()
              strUrl = WebServicesLink.saveDailyReport
             
-            param = ["appid":"com.starwebindia.nafees","userid":userId,"driver_id":driverId,"report_date":btnCalender.currentTitle!,"truck_no":btnTruck.currentTitle!,"order_no":txtOrderNumber.text ?? "","city":btnCity.currentTitle!,"site":btnSite.currentTitle!,"site_amount":btnRate.currentTitle!,"waiting_reason":btnWaitingTImeR.currentTitle!,"waiting_time":btnTime.currentTitle!,"waiting_time_amount":WaitinAmount,"latitude":latitude,"longitude":longitude,"location":location,"pincode":zipcode,"filename":img]
+            param = ["appid":"com.starwebindia.nafees","userid":userId,"driver_id":driverId,"report_date":btnCalender.currentTitle!,"truck_no":btnTruck.currentTitle!,"order_no":txtOrderNumber.text ?? "","city":btnCity.currentTitle!,"site":btnSite.currentTitle!,"site_amount":btnRate.currentTitle!,"waiting_reason":btnWaitingTImeR.currentTitle!,"waiting_time":btnTime.currentTitle!,"waiting_time_amount":WaitinAmount,"latitude":latitude,"longitude":longitude,"location":location,"pincode":zipcode,"filename":img.jpegData(compressionQuality:0)!]
            
              print("strUrl >>>>>>>>>>\(strUrl)")
             print("Param >>>>>>>>>>",param)
@@ -637,7 +731,7 @@ override func viewWillAppear(_ animated: Bool) {
              PopUpView.addPopUpAlertView(MessageStringFile.whoopsText(), leftBtnTitle:MessageStringFile.okText() , rightBtnTitle:"" , firstLblTitle: MessageStringFile.networkReachability(), secondLblTitle: "")
              PopUpView.sharedInstance.delegate = nil
          }
-     }
+     }*/
     
     
 }

@@ -9,6 +9,7 @@
 import UIKit
 import PDFKit
 import PDFGenerator
+
 class WeeklyReportVC: UIViewController,UISearchBarDelegate,UIDocumentInteractionControllerDelegate {
    
     @IBOutlet weak var lblTotalPay: UILabel!
@@ -106,9 +107,15 @@ class WeeklyReportVC: UIViewController,UISearchBarDelegate,UIDocumentInteraction
         
         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
                 if searchText != "" {
-                    let searchPredicate = NSPredicate(format: "report_date CONTAINS[C] %@", searchBar.text!)
+                    let firstNamePredicate = NSPredicate(format: "report_date contains[c] %@", searchBar.text!)
+                     let lastNamePredicate = NSPredicate(format: "site contains[c] %@", searchBar.text!)
+                     let cityPredicate = NSPredicate(format: "city contains[c] %@", searchBar.text!)
+                      let orderPredicate = NSPredicate(format: "city contains[c] %@", searchBar.text!)
+                    
+                     let orPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: [firstNamePredicate, lastNamePredicate, cityPredicate,orderPredicate])
+                    //let searchPredicate = NSPredicate(format: "report_date,site,city,order_no CONTAINS[C]@", searchBar.text!)
                     arrFiltered = (arrWeek as
-                        NSArray).filtered(using: searchPredicate) as NSArray
+                        NSArray).filtered(using: orPredicate) as NSArray
                     if(arrFiltered.count == 0){
                         searchActive = true;
                     } else {
@@ -312,12 +319,10 @@ class WeeklyReportVC: UIViewController,UISearchBarDelegate,UIDocumentInteraction
     
     
   func WS_GetReports(){
-    
+     SwiftLoader.show(animated: true)
          if HelperClass.isInternetAvailable {
-            
             let userdict = AppUserDefault.getUserDetails()
              let userId = userdict.GetInt(forKey: "id")
-             SwiftLoader.show(animated: true)
              var param = [String:Any]()
             let strUrl = WebServicesLink.getReports
            // param = ["appid":"com.starwebindia.nafees","userid":userId]
@@ -325,7 +330,6 @@ class WeeklyReportVC: UIViewController,UISearchBarDelegate,UIDocumentInteraction
              print("strUrl >>>>>>>>>>\(strUrl)")
             print("param",param)
              WebService.createRequestAndGetResponse(strUrl, methodType: .POST, andHeaderDict:[:], andParameterDict:param, onCompletion: { (dictResponse,error,reply,statusCode) in
-                 SwiftLoader.hide()
                  print("dictResponse >>>\(String(describing: dictResponse))")
                  print("error >>>\(String(describing: error))")
                  print("reply >>>\(String(describing: reply))")
@@ -333,6 +337,7 @@ class WeeklyReportVC: UIViewController,UISearchBarDelegate,UIDocumentInteraction
                  
                  let json = dictResponse! as[String: Any] as NSDictionary
                  print("json>>>>\(json)")
+                SwiftLoader.hide()
                  var msg = ""
                  msg = json.GetString(forKey: WebServiceConstant.msg)
                  if msg == "" {

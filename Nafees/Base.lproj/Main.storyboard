@@ -1950,9 +1950,8 @@
                                     </mask>
                                 </variation>
                             </scrollView>
-                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVs-zv-50z">
-                                <rect key="frame" x="0.0" y="11" width="375" height="681"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVs-zv-50z">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="686"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="btnHide:" destination="FTz-zM-XOk" eventType="touchUpInside" id="lc8-j6-5AM"/>
@@ -2052,16 +2051,20 @@
                             <constraint firstItem="fbS-Tk-OKZ" firstAttribute="centerX" secondItem="sSq-yy-Xoq" secondAttribute="centerX" id="2nh-ku-6Vm"/>
                             <constraint firstItem="12S-sz-Io8" firstAttribute="trailing" secondItem="gho-zB-sqh" secondAttribute="trailing" constant="20" id="4FT-8w-bEG"/>
                             <constraint firstItem="JfE-IU-k2h" firstAttribute="trailing" secondItem="12S-sz-Io8" secondAttribute="trailing" id="CxB-ns-U3h"/>
+                            <constraint firstItem="AVs-zv-50z" firstAttribute="trailing" secondItem="12S-sz-Io8" secondAttribute="trailing" id="DZC-SV-yQG"/>
                             <constraint firstItem="gho-zB-sqh" firstAttribute="top" secondItem="JfE-IU-k2h" secondAttribute="bottom" constant="40" id="L4F-bd-iLR"/>
                             <constraint firstItem="fbS-Tk-OKZ" firstAttribute="trailing" secondItem="12S-sz-Io8" secondAttribute="trailing" id="NGB-1x-CP8"/>
                             <constraint firstItem="gho-zB-sqh" firstAttribute="centerX" secondItem="sSq-yy-Xoq" secondAttribute="centerX" id="T5g-4O-FVV"/>
                             <constraint firstItem="F6A-AV-duG" firstAttribute="width" secondItem="sSq-yy-Xoq" secondAttribute="width" id="Ww8-8G-Ssg"/>
+                            <constraint firstItem="AVs-zv-50z" firstAttribute="leading" secondItem="12S-sz-Io8" secondAttribute="leading" id="YnO-TP-yDn"/>
                             <constraint firstItem="JfE-IU-k2h" firstAttribute="leading" secondItem="12S-sz-Io8" secondAttribute="leading" id="fME-kp-qwU"/>
                             <constraint firstItem="JfE-IU-k2h" firstAttribute="top" secondItem="12S-sz-Io8" secondAttribute="top" id="gyg-Fw-YPG"/>
                             <constraint firstItem="fbS-Tk-OKZ" firstAttribute="leading" secondItem="12S-sz-Io8" secondAttribute="leading" id="r7c-fe-jC3"/>
                             <constraint firstItem="gho-zB-sqh" firstAttribute="leading" secondItem="12S-sz-Io8" secondAttribute="leading" constant="20" id="tBW-Ka-t7j"/>
                             <constraint firstItem="fbS-Tk-OKZ" firstAttribute="top" secondItem="12S-sz-Io8" secondAttribute="top" constant="50" id="tdP-Lb-Lk2"/>
                             <constraint firstItem="gho-zB-sqh" firstAttribute="centerY" secondItem="sSq-yy-Xoq" secondAttribute="centerY" id="tky-sg-vKy"/>
+                            <constraint firstItem="AVs-zv-50z" firstAttribute="top" secondItem="sSq-yy-Xoq" secondAttribute="top" id="zk9-4W-2rE"/>
+                            <constraint firstAttribute="bottom" secondItem="AVs-zv-50z" secondAttribute="bottom" id="zqK-lI-bTG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="12S-sz-Io8"/>
                     </view>
@@ -2246,13 +2249,13 @@
         <image name="16-daily-report" width="16" height="16"/>
         <image name="calendar" width="24" height="24"/>
         <image name="drop" width="12" height="12"/>
-        <image name="eye" catalog="system" width="64" height="40"/>
+        <image name="eye" catalog="system" width="32" height="32"/>
         <image name="key" width="16" height="16"/>
         <image name="left-arrow" width="21.333333969116211" height="21.333333969116211"/>
         <image name="pdf" width="21.333333969116211" height="21.333333969116211"/>
         <image name="pin" width="8" height="8"/>
-        <image name="printer" catalog="system" width="64" height="54"/>
         <image name="printer" width="21.333333969116211" height="21.333333969116211"/>
+        <image name="printer" catalog="system" width="64" height="54"/>
         <image name="qq" width="1024" height="586"/>
         <image name="timer" catalog="system" width="64" height="60"/>
         <image name="truck" width="16" height="16"/>
