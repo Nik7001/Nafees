@@ -28,12 +28,16 @@ class ViewController: UIViewController {
         viewPassword.setCornerRadiousAndBorder(.systemBlue, borderWidth: 0.5, cornerRadius: viewPassword.frame.size.height/2)
         
         btnLogin.setCornerRadiousAndBorder(.clear, borderWidth: 0.5, cornerRadius: btnLogin.frame.size.height/2)
-      //  txtUserName.text = "test@gmail.com"
-      //  txtPassword.text = "test"
+       txtUserName.text = "test@gmail.com"
+       txtPassword.text = "test"
         
         //txtUserName.text = "fmklcc@hotmail.com"
         // txtPassword.text = "Nafees@421"
         // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     @IBAction func btnSignIn(_ sender: Any) {

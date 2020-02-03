@@ -163,7 +163,7 @@ class MessageStringFile: NSObject {
     }
  
     class func vValidFullName() -> String {
-        return "At least enter 2 character"
+        return "Enter Driver Name"
     }
     
     

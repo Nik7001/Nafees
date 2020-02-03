@@ -48,6 +48,13 @@ class WebServicesLink: NSObject {
             return (baseUrl + "loginUser")
         }
     }
+    class var SignUp: String {
+           get {
+               return (baseUrl + "signupUser")
+           }
+       }
+    
+  
     class var getReportEntryData: String {
         get {
             return (baseUrl + "getReportEntryData")
