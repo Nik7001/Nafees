@@ -30,9 +30,9 @@
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Description</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Will you allow this app to always know your location?</string>
+	<string>Nafees App need your current Location to calculate waiting time</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Do you allow this app to know your current location?</string>
+	<string>Nafees App need your current Location to calculate waiting time</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>This app wants to take pictures</string>
 	<key>NSPhotoLibraryUsageDescription</key>
